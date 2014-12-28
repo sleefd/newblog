@@ -4,10 +4,10 @@
     <title>慎独</title>
     <description>博学之，审问之，慎思之，明辨之，笃行之
 </description>
-    <link>http://sleefd.github.io/</link>
-    <atom:link href="http://sleefd.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Dec 2014 21:39:34 +0800</pubDate>
-    <lastBuildDate>Sun, 28 Dec 2014 21:39:34 +0800</lastBuildDate>
+    <link>http://sleefd.github.io/blog/</link>
+    <atom:link href="http://sleefd.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 28 Dec 2014 22:08:59 +0800</pubDate>
+    <lastBuildDate>Sun, 28 Dec 2014 22:08:59 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -28,8 +28,8 @@
 
 </description>
         <pubDate>Mon, 29 Dec 2014 04:35:27 +0800</pubDate>
-        <link>http://sleefd.github.io/jekyll/update/2014/12/29/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/jekyll/update/2014/12/29/welcome-to-jekyll.html</guid>
+        <link>http://sleefd.github.io/blog/jekyll/update/2014/12/29/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/blog/jekyll/update/2014/12/29/welcome-to-jekyll.html</guid>
         
         
         <category>jekyll</category>
