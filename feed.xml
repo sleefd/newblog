@@ -6,30 +6,38 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 Dec 2014 09:40:28 +0800</pubDate>
-    <lastBuildDate>Mon, 29 Dec 2014 09:40:28 +0800</lastBuildDate>
+    <pubDate>Tue, 30 Dec 2014 00:03:58 +0800</pubDate>
+    <lastBuildDate>Tue, 30 Dec 2014 00:03:58 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>octopress博客迁移到新电脑</title>
+        <description>&lt;p&gt;本来是用octopress写博客，但是上班换了新电脑，需要在新电脑上重新部署octopress。&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;首先clone下source分支的代码,然后clone master分支的代码到_deploy文件夹中。master分支存放的是渲染后的博客，source分支存放的是octopress代码以及主题等。github访问xx.github.com，访问的就是该repo下的master分支代码。&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;重新部署的时候遇到下面几个问题：&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;source分支的代码从来没有上传过， github上只保存有最新的master分支的文件。&lt;/li&gt;
+  &lt;li&gt;rake new_post，然后rake deploy之后，_deploy文件夹被清空，然后重新生成，导致原来的所有post遗失。&lt;/li&gt;
+  &lt;li&gt;所有post的markdown文件遗失，无法重新生成所有的html文件。如果源markdown没有遗失，啥事都没有，哎。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;尝试过这样一些解决方法：&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;修改Rakefile，修改push task，每次push都不删除deploy文件，不行。因为new_post会产生新的index.html和sitemap，虽然保留有旧的post html，但没法从index.html访问到。&lt;/li&gt;
+  &lt;li&gt;复制deploy中的文件到source文件夹中，因为source文件夹缺少一些资源，还是不行。rake generate的时候，没有更新index.html。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;稍后有时间再试一试方法2，可以先把资源拷贝到source里面，然后修改index，保有原来的post链接，新链接可添加在index里面。如果还是不行的话，就只能写个脚本调用pandoc将html转化成markdown，然后再把所有post的markdown丢到soure的post文件夹下面了。&lt;/p&gt;
+
+&lt;p&gt;这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作等等。决定抽时间看git pro，系统的学习一下git的操作。&lt;/p&gt;
 </description>
         <pubDate>Mon, 29 Dec 2014 04:35:27 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/jekyll/update/2014/12/29/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/jekyll/update/2014/12/29/welcome-to-jekyll.html</guid>
+        <link>http://sleefd.github.io/newblog/jekyll/update/2014/12/29/move-octopress.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/jekyll/update/2014/12/29/move-octopress.html</guid>
         
         
         <category>jekyll</category>
