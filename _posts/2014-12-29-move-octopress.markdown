@@ -22,4 +22,4 @@ categories: jekyll update
 
 稍后有时间再试一试方法2，可以先把资源拷贝到source里面，然后修改index，保有原来的post链接，新链接可添加在index里面。如果还是不行的话，就只能写个脚本调用pandoc将html转化成markdown，然后再把所有post的markdown丢到soure的post文件夹下面了。
 
-这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作等等。决定抽时间看git pro，系统的学习一下git的操作。
+这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作,怎样阅读diff文件等等。决定抽时间看git pro，系统的学习一下git的操作。
