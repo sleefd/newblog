@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "new-jekyll-blog"
+title: "重新用jekyll写博客"
 date: 2015-01-02 18:07
 comments: true
 categories: 
