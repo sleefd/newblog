@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "octopress博客迁移到新电脑"
-date:   2014-12-28 20:35:27
+date:   2014-12-29 20:35:27
 categories: jekyll update
 ---
 
