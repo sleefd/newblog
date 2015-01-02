@@ -36,13 +36,13 @@ task :deploy do |t, args|
   system("git commit -m \"#{message}\"")
 
   puts "update remote source branch"
-  system("git push origin master")
+  system("git push #{remote} #{source_branch}")
 
   puts "build jekyll site"
   system("jekyll build")
   puts "update remote gh-pages branch(origin/gh-pages)"
   system("cd #{deploy_dir} && git commit -m \"#{message}\"") #do stage and commit together
-  system("cd #{deploy_dir} & git push origin gh-pages") 
+  system("cd #{deploy_dir} & git push #{remote} #{site_branch}") 
 end
 
   
