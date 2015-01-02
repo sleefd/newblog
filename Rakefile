@@ -42,7 +42,7 @@ task :deploy do |t, args|
   system("jekyll build")
   puts "update remote gh-pages branch(origin/gh-pages)"
   system("cd #{deploy_dir} && git commit -a -m \"#{message}\"") #do stage and commit together
-  system("cd #{deploy_dir} & git push #{remote} #{site_branch}") 
+  system("cd #{deploy_dir} && git push #{remote} #{site_branch}") 
 end
 
   
