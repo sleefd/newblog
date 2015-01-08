@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>octopress博客迁移到新电脑</title>
-  <meta name="description" content="本来是用octopress写博客，但是上班换了新电脑，需要在新电脑上重新部署octopress。">
+  <title>python scikit-learn安装</title>
+  <meta name="description" content="前段时间做mapreduce算法部分设计的时候，正好看过python scikit-learn的api文档，学习了一下它的设计。最近正好要做算法结果对比，可借机学习一下scikit-learn的使用。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://sleefd.github.io/jekyll/update/2014/12/30/move-octopress.html">
+  <link rel="canonical" href="http://sleefd.github.io/python/2015/01/06/scikit-learn-install.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/feed.xml" />
 </head>
 
@@ -57,33 +57,32 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">octopress博客迁移到新电脑</h1>
-    <p class="post-meta">Dec 30, 2014</p>
+    <h1 class="post-title">python scikit-learn安装</h1>
+    <p class="post-meta">Jan 6, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>本来是用octopress写博客，但是上班换了新电脑，需要在新电脑上重新部署octopress。</p>
+    <p>前段时间做mapreduce算法部分设计的时候，正好看过python scikit-learn的api文档，学习了一下它的设计。
+最近正好要做算法结果对比，可借机学习一下scikit-learn的使用。</p>
 
-<p>首先clone下source分支的代码,然后clone master分支的代码到_deploy文件夹中。master分支存放的是渲染后的博客，source分支存放的是octopress代码以及主题等。github访问xx.github.com，访问的就是该repo下的master分支代码。</p>
-
-<p>重新部署的时候遇到下面几个问题：</p>
-
-<ul>
-  <li>source分支的代码从来没有上传过， github上只保存有最新的master分支的文件。</li>
-  <li>rake new_post，然后rake deploy之后，_deploy文件夹被清空，然后重新生成，导致原来的所有post遗失。</li>
-  <li>所有post的markdown文件遗失，无法重新生成所有的html文件。如果源markdown没有遗失，啥事都没有，哎。</li>
-</ul>
-
-<p>尝试过这样一些解决方法：</p>
+<p>在64位win8上安装scikit-learn.</p>
 
 <ul>
-  <li>修改Rakefile，修改push task，每次push都不删除deploy文件，不行。因为new_post会产生新的index.html和sitemap，虽然保留有旧的post html，但没法从index.html访问到。</li>
-  <li>复制deploy中的文件到source文件夹中，因为source文件夹缺少一些资源，还是不行。rake generate的时候，没有更新index.html。</li>
+  <li>安装python2.7。</li>
+  <li>安装python包管理工具pip。下载get-pip.py,然后执行<code>python get-pip.py</code>即可. 输入python -m pip，出现一堆pip命令说明，则安装成功。</li>
+  <li>安装scikit-learn. <code>python -m pip install -U scikit-learn</code> </li>
+  <li>安装numpy. 那么问题就来了。开始同样想通过pip install来安装numpy,但一堆问题。这个命令会下载numpy源码包，然后编译，提示vc++编译器找不到。于是根据提示的下载链接下载
+python vc++编译器，重新执行该命令，没问题了，可是该命令一直执行，无任何屏幕输出，卡住了，等了好久都没
+结果出现，于是考虑去官网上下载可执行安装包。在sourceforge上numpy主页找到了安装包列表，但只有win32位的，
+下载下来准备用win32位试试。可是安装界面找不到python27目录。提示Python27没有注册。
+网上搜索下发现原因是32位应用与64位应用的注册表目录不一致，我安装的是64位python，因此32位应用会找不到python27位置，可通过修改注册表解决。
+改注册表略麻烦，幸运的在stackoverflow上找到了64位python包的<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs">下载列表</a>，直接下载64位numpy安装包搞定.</li>
+  <li>安装scipy. 同样直接列表下载安装包安装。</li>
 </ul>
 
-<p>稍后有时间再试一试方法2，可以先把资源拷贝到source里面，然后修改index，保有原来的post链接，新链接可添加在index里面。如果还是不行的话，就只能写个脚本调用pandoc将html转化成markdown，然后再把所有post的markdown丢到soure的post文件夹下面了。</p>
-
-<p>这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作,怎样阅读diff文件等等。决定抽时间看git pro，系统的学习一下git的操作。</p>
+<p>综上，scikit-learn安装问题最后归结为在64位windows上安装numpy与scipy。numpy与scipy本身根据机器做了优化，
+因此需要在本机上对源码进行编译，但由于编译出了问题，我直接下载别人提供的unofficial python lib，感谢提供
+各个版本python lib下载列表的这位仁兄。</p>
 
   </article>
 
