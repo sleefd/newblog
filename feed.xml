@@ -4,10 +4,10 @@
     <title>慎独</title>
     <description>博学之，审问之，慎思之，明辨之，笃行之
 </description>
-    <link>http://sleefd.github.io/</link>
-    <atom:link href="http://sleefd.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Jan 2015 10:25:48 +0800</pubDate>
-    <lastBuildDate>Fri, 09 Jan 2015 10:25:48 +0800</lastBuildDate>
+    <link>http://sleefd.github.io/newblog/</link>
+    <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 09 Jan 2015 10:38:20 +0800</pubDate>
+    <lastBuildDate>Fri, 09 Jan 2015 10:38:20 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -60,8 +60,8 @@ key是text，value也是text。&lt;/p&gt;
 像做app开发一下，一定要做真机测试，不同机型很可能就会有不同问题。&lt;/p&gt;
 </description>
         <pubDate>Thu, 08 Jan 2015 23:18:00 +0800</pubDate>
-        <link>http://sleefd.github.io/mahout/2015/01/08/testnaivebayes-prob.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/mahout/2015/01/08/testnaivebayes-prob.html</guid>
+        <link>http://sleefd.github.io/newblog/mahout/2015/01/08/testnaivebayes-prob.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/mahout/2015/01/08/testnaivebayes-prob.html</guid>
         
         
         <category>mahout</category>
@@ -93,8 +93,8 @@ python vc++编译器，重新执行该命令，没问题了，可是该命令一
 各个版本python lib下载列表的这位仁兄。&lt;/p&gt;
 </description>
         <pubDate>Tue, 06 Jan 2015 22:59:00 +0800</pubDate>
-        <link>http://sleefd.github.io/python/2015/01/06/scikit-learn-install.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/python/2015/01/06/scikit-learn-install.html</guid>
+        <link>http://sleefd.github.io/newblog/python/2015/01/06/scikit-learn-install.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/01/06/scikit-learn-install.html</guid>
         
         
         <category>python</category>
@@ -117,8 +117,8 @@ StringBuilder不是线程安全的。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 04 Jan 2015 23:56:00 +0800</pubDate>
-        <link>http://sleefd.github.io/java/2015/01/04/all-about-string.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/java/2015/01/04/all-about-string.html</guid>
+        <link>http://sleefd.github.io/newblog/java/2015/01/04/all-about-string.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/java/2015/01/04/all-about-string.html</guid>
         
         
         <category>java</category>
@@ -157,8 +157,8 @@ remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,mas
 
 </description>
         <pubDate>Fri, 02 Jan 2015 18:07:00 +0800</pubDate>
-        <link>http://sleefd.github.io/2015/01/02/new-jekyll-blog.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/2015/01/02/new-jekyll-blog.html</guid>
+        <link>http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</guid>
         
         
       </item>
@@ -189,8 +189,8 @@ remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,mas
 &lt;p&gt;这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作,怎样阅读diff文件等等。决定抽时间看git pro，系统的学习一下git的操作。&lt;/p&gt;
 </description>
         <pubDate>Tue, 30 Dec 2014 04:35:27 +0800</pubDate>
-        <link>http://sleefd.github.io/jekyll/update/2014/12/30/move-octopress.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/jekyll/update/2014/12/30/move-octopress.html</guid>
+        <link>http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html</guid>
         
         
         <category>jekyll</category>
