@@ -3,7 +3,7 @@ title: 慎独
 email: sleefd@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   博学之，审问之，慎思之，明辨之，笃行之
-baseurl: "/newblog" # the subpath of your site, e.g. /blog/
+baseurl: "/newblog/" # the subpath of your site, e.g. /blog/
 url: "http://sleefd.github.io" # the base hostname & protocol for your site
 twitter_username: sleefd
 github_username:  sleefd
