@@ -9,9 +9,9 @@
   <title>StringBuffer,StringBuilder与线程安全</title>
   <meta name="description" content="java里，String是不可变的序列，immutable，每write一次String，实际上创建了一个新String实例。">
 
-  <link rel="stylesheet" href="/newblog//css/main.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog//java/2015/01/04/all-about-string.html">
-  <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog//feed.xml" />
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://sleefd.github.io/java/2015/01/04/all-about-string.html">
+  <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/feed.xml" />
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/newblog//">慎独</a>
+    <a class="site-title" href="/">慎独</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -35,7 +35,7 @@
       <div class="trigger">
         
           
-          <a class="page-link" href="/newblog//about/">About</a>
+          <a class="page-link" href="/about/">About</a>
           
         
           
@@ -67,11 +67,12 @@
 <p>而StringBuffer与StringBuilder存储可变的字符序列，mutable,可在原对象上append, remove, instert字符串。
 改变字符串的操作较多时，应该用这两个类代替String类。二者提供的操作函数一致。</p>
 
-<p>二者的区别：</p>
+<p>根据api文档， 二者的区别：</p>
 
 <ul>
   <li>StringBuffer是线程安全的。意味着如果在多线程环境下对它的实例就行操作，不会产生不确定的行为。
 StringBuilder不是线程安全的。</li>
+  <li>由于StringBuilder不是线程安全的，StringBuilder效率更高。</li>
 </ul>
 
   </article>
