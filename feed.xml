@@ -4,11 +4,83 @@
     <title>慎独</title>
     <description>博学之，审问之，慎思之，明辨之，笃行之
 </description>
-    <link>http://sleefd.github.io/newblog/</link>
-    <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Jan 2015 10:38:20 +0800</pubDate>
-    <lastBuildDate>Fri, 09 Jan 2015 10:38:20 +0800</lastBuildDate>
+    <link>http://sleefd.github.io/newblog//</link>
+    <atom:link href="http://sleefd.github.io/newblog//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 07 Feb 2015 22:18:52 +0800</pubDate>
+    <lastBuildDate>Sat, 07 Feb 2015 22:18:52 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>[日常]python yield、decorator 与可变参数</title>
+        <description>&lt;p&gt;查了点资料，学习了下yield与decorator的使用&lt;/p&gt;
+
+&lt;p&gt;先看yield, 使用yield的函数，在调用参数后成为一个generator对象，&lt;/p&gt;
+
+&lt;p&gt;每次调用generator的next函数可返回每次yield的值。函数调用不执行&lt;/p&gt;
+
+&lt;p&gt;函数代码,而是得到一个iterable的generator对象，调用该对象的next方法
+可得到每次迭代的值。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#fibnacci numbers&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; 
+	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;generator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;generator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;decorator装饰器，接受一个函数作为参数，返回一个经过修改的函数.&lt;/p&gt;
+
+&lt;p&gt;如下面代码所示，定义了一个decorator, 该decorator对函数f做改变后返回一个新函数.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;decorator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;anotherF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;anotherF&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@decorator&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#annotate&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;#f now is a new function decorated by decorator&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;pass&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;decorator涉及到的概念包括：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;函数作用域&lt;/li&gt;
+  &lt;li&gt;变量生命周期&lt;/li&gt;
+  &lt;li&gt;高阶函数&lt;/li&gt;
+  &lt;li&gt;闭包&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;定义多变参数：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#tuple&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#dict&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;参考 &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html&quot;&gt;http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html&lt;/a&gt;  &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/&quot;&gt;http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 07 Feb 2015 20:52:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog//daily/python/2015/02/07/yield-and-decorator.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog//daily/python/2015/02/07/yield-and-decorator.html</guid>
+        
+        
+        <category>daily</category>
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>修改mahout naivebayes test driver遇到问题</title>
@@ -60,8 +132,8 @@ key是text，value也是text。&lt;/p&gt;
 像做app开发一下，一定要做真机测试，不同机型很可能就会有不同问题。&lt;/p&gt;
 </description>
         <pubDate>Thu, 08 Jan 2015 23:18:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/mahout/2015/01/08/testnaivebayes-prob.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/mahout/2015/01/08/testnaivebayes-prob.html</guid>
+        <link>http://sleefd.github.io/newblog//mahout/2015/01/08/testnaivebayes-prob.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog//mahout/2015/01/08/testnaivebayes-prob.html</guid>
         
         
         <category>mahout</category>
@@ -93,8 +165,8 @@ python vc++编译器，重新执行该命令，没问题了，可是该命令一
 各个版本python lib下载列表的这位仁兄。&lt;/p&gt;
 </description>
         <pubDate>Tue, 06 Jan 2015 22:59:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/01/06/scikit-learn-install.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/01/06/scikit-learn-install.html</guid>
+        <link>http://sleefd.github.io/newblog//python/2015/01/06/scikit-learn-install.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog//python/2015/01/06/scikit-learn-install.html</guid>
         
         
         <category>python</category>
@@ -115,10 +187,11 @@ python vc++编译器，重新执行该命令，没问题了，可是该命令一
 StringBuilder不是线程安全的。&lt;/li&gt;
   &lt;li&gt;由于StringBuilder不是线程安全的，StringBuilder效率更高。&lt;/li&gt;
 &lt;/ul&gt;
+
 </description>
         <pubDate>Sun, 04 Jan 2015 23:56:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/java/2015/01/04/all-about-string.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/java/2015/01/04/all-about-string.html</guid>
+        <link>http://sleefd.github.io/newblog//java/2015/01/04/all-about-string.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog//java/2015/01/04/all-about-string.html</guid>
         
         
         <category>java</category>
@@ -157,8 +230,8 @@ remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,mas
 
 </description>
         <pubDate>Fri, 02 Jan 2015 18:07:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</guid>
+        <link>http://sleefd.github.io/newblog//2015/01/02/new-jekyll-blog.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog//2015/01/02/new-jekyll-blog.html</guid>
         
         
       </item>
@@ -189,8 +262,8 @@ remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,mas
 &lt;p&gt;这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作,怎样阅读diff文件等等。决定抽时间看git pro，系统的学习一下git的操作。&lt;/p&gt;
 </description>
         <pubDate>Tue, 30 Dec 2014 04:35:27 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html</guid>
+        <link>http://sleefd.github.io/newblog//jekyll/update/2014/12/30/move-octopress.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog//jekyll/update/2014/12/30/move-octopress.html</guid>
         
         
         <category>jekyll</category>

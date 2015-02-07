@@ -11,10 +11,10 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Microsoft YaHei, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  font-weight: 300;
+  font-weight: normal;
   color: #111111;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%; }
@@ -90,6 +90,7 @@ blockquote {
  */
 pre,
 code {
+  font-family: Consolas;
   font-size: 15px;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
@@ -275,7 +276,7 @@ pre {
 
 .post-link {
   display: block;
-  font-size: 24px; }
+  font-size: 20px; }
 
 /**
  * Posts
@@ -284,7 +285,7 @@ pre {
   margin-bottom: 30px; }
 
 .post-title {
-  font-size: 42px;
+  font-size: 30px;
   letter-spacing: -1px;
   line-height: 1; }
   @media screen and (max-width: 800px) {
