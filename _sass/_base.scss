@@ -17,7 +17,7 @@ body {
     font-family: $base-font-family;
     font-size: $base-font-size;
     line-height: $base-line-height;
-    font-weight: 300;
+    font-weight: normal;
     color: $text-color;
     background-color: $background-color;
     -webkit-text-size-adjust: 100%;
@@ -127,6 +127,7 @@ blockquote {
  */
 pre,
 code {
+	font-family: Consolas;
     font-size: 15px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
