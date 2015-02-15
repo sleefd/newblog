@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>match roman number with regex</title>
-  <meta name="description" content="">
+  <title>正则表达式匹配罗马数字</title>
+  <meta name="description" content="最近开始重新学Python，做完了hackerrank python tutorial的题目，基本语法算是掌握了。">
 
   <link rel="stylesheet" href="/newblog/css/main.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/2015/02/07/match-roman-number-with-regex.html">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -57,12 +57,101 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">match roman number with regex</h1>
-    <p class="post-meta">Feb 7, 2015</p>
+    <h1 class="post-title">正则表达式匹配罗马数字</h1>
+    <p class="post-meta">Feb 15, 2015</p>
   </header>
 
   <article class="post-content">
-    
+    <p>最近开始重新学Python，做完了<a href="https://www.hackerrank.com/">hackerrank</a> python tutorial的题目，基本语法算是掌握了。</p>
+
+<p>最后AC的一道题就是<a href="https://www.hackerrank.com/challenges/regex-2-validate-a-roman-number">正则匹配罗马数字</a>。正则语法看过很多次，但感觉一直没有掌握，这次总算实战了一下，感觉正则匹配罗马数字
+是学习基本正则的一个很好的case，stackoverflow也有与这相关的问题。在做这道题的时候，我也在在sof上面提了
+一个<a href="http://stackoverflow.com/questions/28381287/whats-the-difference-between-regular-pattern-abcd-and-abcd">问题</a>.</p>
+
+<p>先分析一下题目：</p>
+
+<p>要求是匹配[1~3999]之间的所有罗马数字，匹配则输出True,不匹配则输出False.罗马数字由以下几个字母表示：</p>
+
+<ul>
+  <li>I, 1, 最多出现3次</li>
+  <li>V, 5, 不能重复出现</li>
+  <li>X, 10, 最多出现3次</li>
+  <li>L, 50, 不能重复出现</li>
+  <li>C, 100, 最多出现3次</li>
+  <li>D, 500, 不能重复出现</li>
+  <li>M, 1000, 最多出现3次</li>
+</ul>
+
+<p>只需按照1~10、10~100等分段表示罗马数字，然后由低到高组合所有段，即可得到匹配的正则表达式。</p>
+<pre>
+[1,10): IX|IV|V|V?I{1,3}
+		V?I{1,3}: 1~3, 6~8 
+	 	IV: 4 
+ 	    IX: 9
+ 	    V: 5
+ 	    合并4与5得到 I?V 
+ 	    =&gt; IX|I?V|V?I{1,3}
+
+[10, 100): XC|XL|L|L?X{1,3}
+		L?X(1,3): 10~30， 60~80
+		XL: 40
+		XC: 90
+		L: 50
+		合并40与50得到 X?L
+		=&gt; XC|X?L|L?X{1,3}
+同理可得
+	[100~1000): CM|C?D|D?C{1,3}
+	[1000~4000): M{1,3}
+
+综上：得到M{1,3}?|(CM|C?D|D?C{1,3})?|(XC|XL|L|L?X{1,3})?|(IX|I?V|V?I{1,3})?
+      通过？,来达到四位数的组合，但是可能会出现空串的情况
+      加上前向断言(?=.)，防止空串出现
+最后得到：^(?=.)M{1,3}?(CM|C?D|D?C{1,3})?(XC|XL|L|L?X{1,3})?(IX|I?V|V?I{1,3})?$
+</pre>
+
+<p>总结：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>^ab</td>
+      <td>cd$: 匹配以ab开头或以cd结尾的字符串</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>^(ab</td>
+      <td>cd)$: 匹配ab或cd， 不匹配abcd</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>(?=sth): look ahead assert前向断言, 匹配满足括号中正则的前面一个位置，不消耗字符,意味匹配了括号中的字符继续作为输入匹配后续正则.</p>
+
+<p>比如a(?=b): 匹配ab中的a <br />
+       (?=.)a: 只能匹配a</p>
+
+<p>(?:): not catch group，匹配括号正则的字符串会成为一个group被捕捉，捕捉group会降低匹配效率。对于无需
+   捕捉group的正则，应该将每个()改为(?:).比如上面的罗马数字匹配正则就可以改为</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>^(?=.)M{1,3}?(?:CM</td>
+      <td>C?D</td>
+      <td>D?C{1,3})?(?:XC</td>
+      <td>XL</td>
+      <td>L</td>
+      <td>L?X{1,3})?(?:IX</td>
+      <td>I?V</td>
+      <td>V?I{1,3})?$</td>
+    </tr>
+  </tbody>
+</table>
+
 
   </article>
 

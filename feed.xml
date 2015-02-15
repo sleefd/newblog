@@ -6,23 +6,114 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Feb 2015 23:31:17 +0800</pubDate>
-    <lastBuildDate>Sat, 07 Feb 2015 23:31:17 +0800</lastBuildDate>
+    <pubDate>Sun, 15 Feb 2015 12:44:42 +0800</pubDate>
+    <lastBuildDate>Sun, 15 Feb 2015 12:44:42 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>match roman number with regex</title>
-        <description>
+        <title>正则表达式匹配罗马数字</title>
+        <description>&lt;p&gt;最近开始重新学Python，做完了&lt;a href=&quot;https://www.hackerrank.com/&quot;&gt;hackerrank&lt;/a&gt; python tutorial的题目，基本语法算是掌握了。&lt;/p&gt;
+
+&lt;p&gt;最后AC的一道题就是&lt;a href=&quot;https://www.hackerrank.com/challenges/regex-2-validate-a-roman-number&quot;&gt;正则匹配罗马数字&lt;/a&gt;。正则语法看过很多次，但感觉一直没有掌握，这次总算实战了一下，感觉正则匹配罗马数字
+是学习基本正则的一个很好的case，stackoverflow也有与这相关的问题。在做这道题的时候，我也在在sof上面提了
+一个&lt;a href=&quot;http://stackoverflow.com/questions/28381287/whats-the-difference-between-regular-pattern-abcd-and-abcd&quot;&gt;问题&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;先分析一下题目：&lt;/p&gt;
+
+&lt;p&gt;要求是匹配[1~3999]之间的所有罗马数字，匹配则输出True,不匹配则输出False.罗马数字由以下几个字母表示：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I, 1, 最多出现3次&lt;/li&gt;
+  &lt;li&gt;V, 5, 不能重复出现&lt;/li&gt;
+  &lt;li&gt;X, 10, 最多出现3次&lt;/li&gt;
+  &lt;li&gt;L, 50, 不能重复出现&lt;/li&gt;
+  &lt;li&gt;C, 100, 最多出现3次&lt;/li&gt;
+  &lt;li&gt;D, 500, 不能重复出现&lt;/li&gt;
+  &lt;li&gt;M, 1000, 最多出现3次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;只需按照1~10、10~100等分段表示罗马数字，然后由低到高组合所有段，即可得到匹配的正则表达式。&lt;/p&gt;
+&lt;pre&gt;
+[1,10): IX|IV|V|V?I{1,3}
+		V?I{1,3}: 1~3, 6~8 
+	 	IV: 4 
+ 	    IX: 9
+ 	    V: 5
+ 	    合并4与5得到 I?V 
+ 	    =&amp;gt; IX|I?V|V?I{1,3}
+
+[10, 100): XC|XL|L|L?X{1,3}
+		L?X(1,3): 10~30， 60~80
+		XL: 40
+		XC: 90
+		L: 50
+		合并40与50得到 X?L
+		=&amp;gt; XC|X?L|L?X{1,3}
+同理可得
+	[100~1000): CM|C?D|D?C{1,3}
+	[1000~4000): M{1,3}
+
+综上：得到M{1,3}?|(CM|C?D|D?C{1,3})?|(XC|XL|L|L?X{1,3})?|(IX|I?V|V?I{1,3})?
+      通过？,来达到四位数的组合，但是可能会出现空串的情况
+      加上前向断言(?=.)，防止空串出现
+最后得到：^(?=.)M{1,3}?(CM|C?D|D?C{1,3})?(XC|XL|L|L?X{1,3})?(IX|I?V|V?I{1,3})?$
+&lt;/pre&gt;
+
+&lt;p&gt;总结：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;^ab&lt;/td&gt;
+      &lt;td&gt;cd$: 匹配以ab开头或以cd结尾的字符串&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;^(ab&lt;/td&gt;
+      &lt;td&gt;cd)$: 匹配ab或cd， 不匹配abcd&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;(?=sth): look ahead assert前向断言, 匹配满足括号中正则的前面一个位置，不消耗字符,意味匹配了括号中的字符继续作为输入匹配后续正则.&lt;/p&gt;
+
+&lt;p&gt;比如a(?=b): 匹配ab中的a &lt;br /&gt;
+       (?=.)a: 只能匹配a&lt;/p&gt;
+
+&lt;p&gt;(?:): not catch group，匹配括号正则的字符串会成为一个group被捕捉，捕捉group会降低匹配效率。对于无需
+   捕捉group的正则，应该将每个()改为(?:).比如上面的罗马数字匹配正则就可以改为&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;^(?=.)M{1,3}?(?:CM&lt;/td&gt;
+      &lt;td&gt;C?D&lt;/td&gt;
+      &lt;td&gt;D?C{1,3})?(?:XC&lt;/td&gt;
+      &lt;td&gt;XL&lt;/td&gt;
+      &lt;td&gt;L&lt;/td&gt;
+      &lt;td&gt;L?X{1,3})?(?:IX&lt;/td&gt;
+      &lt;td&gt;I?V&lt;/td&gt;
+      &lt;td&gt;V?I{1,3})?$&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
 </description>
-        <pubDate>Sat, 07 Feb 2015 22:23:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/2015/02/07/match-roman-number-with-regex.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/02/07/match-roman-number-with-regex.html</guid>
+        <pubDate>Sun, 15 Feb 2015 12:23:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</guid>
         
+        
+        <category>python</category>
         
       </item>
     
       <item>
-        <title>[日常]python yield、decorator 与可变参数</title>
+        <title>python yield、decorator 与可变参数</title>
         <description>&lt;p&gt;查了点资料，学习了下yield与decorator的使用&lt;/p&gt;
 
 &lt;p&gt;先看yield, 使用yield的函数，在调用参数后成为一个generator对象，&lt;/p&gt;
@@ -83,11 +174,9 @@
 
 </description>
         <pubDate>Sat, 07 Feb 2015 20:52:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/daily/python/2015/02/07/yield-and-decorator.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/daily/python/2015/02/07/yield-and-decorator.html</guid>
+        <link>http://sleefd.github.io/newblog/python/2015/02/07/yield-and-decorator.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/07/yield-and-decorator.html</guid>
         
-        
-        <category>daily</category>
         
         <category>python</category>
         
