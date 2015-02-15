@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[日常]python yield、decorator 与可变参数"
+title: "python yield、decorator 与可变参数"
 date: 2015-02-07 20:52
 comments: true
-categories: daily python
+categories: python
 ---
 查了点资料，学习了下yield与decorator的使用
 

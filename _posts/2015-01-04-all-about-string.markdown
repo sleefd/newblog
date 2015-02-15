@@ -12,7 +12,7 @@ java里，String是不可变的序列，immutable，每write一次String，实�
 
 根据api文档， 二者的区别：
 
-* StringBuffer是线程安全的。意味着如果在多线程环境下对它的实例就行操作，不会产生不确定的行为。
+* StringBuffer是线程安全的。意味着如果在多线程环境下对它的实例进行操作，不会产生不确定的行为。
 StringBuilder不是线程安全的。
 * 由于StringBuilder不是线程安全的，StringBuilder效率更高。
 
