@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>慎独</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>python docstring使用</title>
+  <meta name="description" content="docstring，文档字符串, 是出现在函数或类开头以”"”包围的字符序列。可用来描述函数作用, 函数的使用方式及对函数做单元测试。">
 
   <link rel="stylesheet" href="/newblog/css/main.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -55,79 +54,49 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">python docstring使用</h1>
+    <p class="post-meta">Feb 16, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Feb 16, 2015</span>
+  <article class="post-content">
+    <p>docstring，文档字符串, 是出现在函数或类开头以”"”包围的字符序列。
+可用来描述函数作用, 函数的使用方式及对函数做单元测试。</p>
 
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/16/python-docstring.html">python docstring使用</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 15, 2015</span>
+<p>docstring中类似运行在python交互解释器中的代码段, 可通过doctest模块
+运行，基于docstring对函数做单元测试，是保证代码正确性的简单有效手段。</p>
 
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/15/match-roman-number-with-regex.html">正则表达式匹配罗马数字</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 7, 2015</span>
+<p>help(funcname)或funcname.<strong>doc</strong>  输出的就是该函数docstring的内容.</p>
 
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/07/yield-and-decorator.html">python yield、decorator 与可变参数</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 8, 2015</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">extract_post_head</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        extract the head of a html post, head contains</span>
+<span class="sd">        post name and post date.</span>
 
-        <h2>
-          <a class="post-link" href="/newblog/mahout/2015/01/08/testnaivebayes-prob.html">修改mahout naivebayes test driver遇到问题</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 6, 2015</span>
+<span class="sd">        &gt;&gt;&gt; extract_post_head( r&quot;blog\\2014\\01\\20\\adapter-model\\index.html&quot; )</span>
+<span class="sd">        (&#39;adapter-model&#39;, &#39;2014\\\\01\\\\20&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">filepath</span><span class="p">[</span><span class="n">filepath</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">end</span><span class="p">]</span>
 
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/01/06/scikit-learn-install.html">python scikit-learn安装</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 4, 2015</span>
+    <span class="n">datepattern</span> <span class="o">=</span> <span class="s">r&quot;\d+</span><span class="se">\\</span><span class="s">\d+</span><span class="se">\\</span><span class="s">\d+&quot;</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">datepattern</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">filename</span><span class="p">,</span> <span class="n">date</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span> <span class="c"># test docstring with doctest</span>
+	<span class="kn">import</span> <span class="nn">doctest</span>
+	<span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></div>
 
-        <h2>
-          <a class="post-link" href="/newblog/java/2015/01/04/all-about-string.html">StringBuffer,StringBuilder与线程安全</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 2, 2015</span>
+<p>写上面的demo学到以下两点:</p>
 
-        <h2>
-          <a class="post-link" href="/newblog/2015/01/02/new-jekyll-blog.html">重新用jekyll写博客</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 30, 2014</span>
+<ol>
+  <li>转义\:  在string literal中需要4个\，在rawstring中只需要两个\</li>
+  <li>tuple中字符串的引号为单引号</li>
+</ol>
 
-        <h2>
-          <a class="post-link" href="/newblog/jekyll/update/2014/12/30/move-octopress.html">octopress博客迁移到新电脑</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/newblog/feed.xml">via RSS</a></p>
+  </article>
 
 </div>
 
