@@ -74,18 +74,16 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extract the head of a html post, head contains</span>
 <span class="sd">        post name and post date.</span>
-
-<span class="sd">        &gt;&gt;&gt; extract_post_head( r&quot;blog\\2014\\01\\20\\adapter-model\\index.html&quot; )</span>
+<span class="sd">        &gt;&gt;&gt; extract_post_head( r&quot;blog\\2014\\01\\20\\adapter-model\\index.html&quot;)</span>
 <span class="sd">        (&#39;adapter-model&#39;, &#39;2014\\\\01\\\\20&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">&quot;</span><span class="p">)</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">filepath</span><span class="p">[</span><span class="n">filepath</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">end</span><span class="p">]</span>
+    <span class="n">namepattern</span> <span class="o">=</span> <span class="s">r&quot;([\w-]+)</span><span class="se">\\</span><span class="s">[\w-]+\.html$&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">namepattern</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">datepattern</span> <span class="o">=</span> <span class="s">r&quot;\d+</span><span class="se">\\</span><span class="s">\d+</span><span class="se">\\</span><span class="s">\d+&quot;</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">datepattern</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">datepattern</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">filename</span><span class="p">,</span> <span class="n">date</span>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span> <span class="c"># test docstring with doctest</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
 	<span class="kn">import</span> <span class="nn">doctest</span>
 	<span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></div>
 
