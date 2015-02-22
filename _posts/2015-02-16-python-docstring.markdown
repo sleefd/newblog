@@ -19,20 +19,18 @@ def extract_post_head(filepath):
     """
         extract the head of a html post, head contains
         post name and post date.
-
-        >>> extract_post_head( r"blog\\2014\\01\\20\\adapter-model\\index.html" )
+        >>> extract_post_head( r"blog\\2014\\01\\20\\adapter-model\\index.html")
         ('adapter-model', '2014\\\\01\\\\20')
     """
-    end = filepath.rfind("\\")
-    filename = filepath[filepath.rfind("\\", 0, end - 1) + 1: end]
+    namepattern = r"([\w-]+)\\[\w-]+\.html$"
+    filename = re.search(namepattern, filepath).group(1)
 
     datepattern = r"\d+\\\d+\\\d+"
-    date = re.compile(datepattern).search(filepath)
-    date = date.group()
+    date = re.compile(datepattern).search(filepath).group()
     return filename, date
-if __name__ == "__main__": # test docstring with doctest
+if __name__ == "__main__":
 	import doctest
-	doctest.testmod(verbose=True)
+	doctest.testmod(verbose=True) 
 
 {% endhighlight %}
 
