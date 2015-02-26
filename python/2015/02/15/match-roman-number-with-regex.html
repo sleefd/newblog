@@ -111,23 +111,9 @@
 
 <p>总结：</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>^ab</td>
-      <td>cd$: 匹配以ab开头或以cd结尾的字符串</td>
-    </tr>
-  </tbody>
-</table>
+<p>^ab|cd$: 匹配以ab开头或以cd结尾的字符串</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>^(ab</td>
-      <td>cd)$: 匹配ab或cd， 不匹配abcd</td>
-    </tr>
-  </tbody>
-</table>
+<p>^(ab|cd)$: 匹配ab或cd， 不匹配abcd</p>
 
 <p>(?=sth): look ahead assert前向断言, 匹配满足括号中正则的前面一个位置，不消耗字符,意味匹配了括号中的字符继续作为输入匹配后续正则.</p>
 

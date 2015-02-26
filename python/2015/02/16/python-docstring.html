@@ -68,7 +68,7 @@
 <p>docstring中类似运行在python交互解释器中的代码段, 可通过doctest模块
 运行，基于docstring对函数做单元测试，是保证代码正确性的简单有效手段。</p>
 
-<p>help(funcname)或funcname.<strong>doc</strong>  输出的就是该函数docstring的内容.</p>
+<p>help(funcname)或funcname.__doc__  输出的就是该函数docstring的内容.</p>
 
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">extract_post_head</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
