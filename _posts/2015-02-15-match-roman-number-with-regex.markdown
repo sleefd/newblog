@@ -53,9 +53,9 @@ categories: python
 
 总结：
 
-   ^ab|cd$: 匹配以ab开头或以cd结尾的字符串
+   ^ab\|cd$: 匹配以ab开头或以cd结尾的字符串
 
-   ^(ab|cd)$: 匹配ab或cd， 不匹配abcd
+   ^(ab\|cd)$: 匹配ab或cd， 不匹配abcd
 
    (?=sth): look ahead assert前向断言, 匹配满足括号中正则的前面一个位置，不消耗字符,意味匹配了括号中的字符继续作为输入匹配后续正则.
 

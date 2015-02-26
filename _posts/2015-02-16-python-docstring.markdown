@@ -12,7 +12,7 @@ docstring，文档字符串, 是出现在函数或类开头以"""包围的字符
 docstring中类似运行在python交互解释器中的代码段, 可通过doctest模块
 运行，基于docstring对函数做单元测试，是保证代码正确性的简单有效手段。
 
-help(funcname)或funcname.__doc__  输出的就是该函数docstring的内容.
+help(funcname)或funcname.\_\_doc\_\_  输出的就是该函数docstring的内容.
 
 {% highlight python %}
 def extract_post_head(filepath):
