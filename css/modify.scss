@@ -1,0 +1,41 @@
+---
+---
+
+pre, code{
+	overflow-x: hidden;
+	color: #74C3EB;
+	background-color: black;
+}
+
+.highlight {
+    pre, code {
+        background-color: black;
+    }
+}
+
+.post-link {
+    display: inline;
+    color: green;
+    font-weight: 400;
+}
+
+.post-meta {
+    float: right; 
+    font-size: 16px;
+}
+
+.post-header .post-meta{
+	float: none;
+}
+.post-title{
+	font-size: 25px;
+	font-weight: bold;
+}
+
+a:visited{
+	color: green;
+}
+
+.pagination{
+	text-align: center;	
+}

@@ -14,7 +14,7 @@ docstring中类似运行在python交互解释器中的代码段, 可通过doctes
 
 help(funcname)或funcname.\_\_doc\_\_  输出的就是该函数docstring的内容.
 
-{% highlight python %}
+{%  highlight python %}
 def extract_post_head(filepath):
     """
         extract the head of a html post, head contains
@@ -31,8 +31,7 @@ def extract_post_head(filepath):
 if __name__ == "__main__":
 	import doctest
 	doctest.testmod(verbose=True) 
-
-{% endhighlight %}
+ {% endhighlight %}
 
 写上面的demo学到以下两点:
 

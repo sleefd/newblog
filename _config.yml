@@ -10,3 +10,9 @@ github_username:  sleefd
 
 # Build settings
 markdown: kramdown
+
+# set code highlight 
+highlighter: pygments
+
+# set pagination
+paginate: 5

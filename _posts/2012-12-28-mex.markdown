@@ -1,0 +1,90 @@
+---
+layout: post
+title: mex调用c代码备忘
+date: 2012-12-28
+comment: true
+category:
+---
+
+-   目的：在matlab中调用c函数，加快代码执行速度或实现c代码复用。
+-   媒介：mex file 有约定俗成的格式，c源文件必须包括头文件 “mex.h”, 函数
+    mexFunction为入口函数. 当然也可以使用其他符合c语法的函数，头文件。
+-   关键： 各种数据类型在matlab和c之间的转换，传递。
+
+-   mexFunction的签名为
+    `   void mexFunction( int nlhs,    mxArray plhs[],    int nrhs,    const mxArray prhs[])`
+    参数解释： nlhs: 输出个数 nrhs: 输入参数的个数 plhs:
+    指向输出的指针数组 prhs: 指向输入的常指针数组
+-   数据类型：
+    matlab传递给c的数据类型都是mxArray类型,matlab的所有数据类型内部都以mxArray的形式存储。(可以猜想mxArray是一个结构体类型。
+-   基本操作：mx/mex函数
+
+           1. *mx开头*的函数为对数据进行操作的函数.
+              记住：有Get操作，就有对应的set操作，而且由于操作大多针对指向数据的指针，所以
+              set操作可能会改变workspace中的变量。
+           2. *mex开头*的函数为与workspace交互的函数，如输出error message ,warning message , printf data等。
+
+#### 代码示例
+
+-   c从matlab获得数据 获取matrix:
+
+          double *p = mxGetPr(prhs[0]) ;//得到指向第一个数据参数的指针。 注意：所有包含数值的参数都是double类型。
+          只要参数是matrix(m*n)类型，都可以通过mxGetPr得到指向数据的指针，数据以从上到下从左到右的形式存储。（也就是线性的~
+
+    获取维数：
+
+          `mexGetM(mxarray)/mexGetN(mxarray)： 得到mxArray的row && column 数`
+
+    获取cell数据类型：
+
+
+{% highlight c++ %}                                      
+     for(int index = 0 ; index < size 
+   ; ++index)                         
+           {                          
+               mxArray * p = mxGetCel 
+ l(prhs[0] , index); //得到index处的mexAr 
+ ray                                  
+               double *elem = mxGetPr 
+ (p);                                 
+          }                          
+{% endhighlight %}
+
+    直接获取data（数值
+
+\` double \*data;
+
+        data = mxGetData(prhs[0]);
+        //mxSetData(p1hs[0] , data);
+        `
+
+-   c返回数据给matlab
+
+        workspace输出：mexPrintf,类似c printf函数。  mexPrintf("%d\n" , number);
+                       mexErrMsgTxt,打印error消息。 mexErrMsgTxt("This is an error message.");
+                       mexEvalString,在workspace中调用string指定的命令。 mexEvalString("plot([1:5])"); //plot命令会被执行
+
+    想要返回数据给matlab，首先要分配空间给输出数据，这样它才能存在于当前的workspace中。
+
+          分配空间的方法 1 plhs[0] = mxCreateDoubleMatrix(m,n,mxReal);
+                          double *data = mxGetPr(plhs[0]); //and then you can assign values to data.
+                         2 利用mxMalloc (用法类似c malloc
+                          double *data = mxMalloc(sizeof(double) * num);
+                              ... //assign values
+                          mxSetPr(prhs , data);
+
+-   动态内存分配:使用mxMalloc/mxFree mxCalloc/mxFree
+
+               虽然c malloc和free也可以使用，但是会导致不可预知的错误，所以谨记使用mex functions.
+
+配置mex file编译环境在matlab中：
+
+    直接在命令行下输入 mex -setup 选择合适的编译器就ok了。
+
+调试：可在VS中采用附加进程调试
+
+有价值的资料：
+
+    1. apiext.pdf //matlab external interface 
+    2. mexguide.pdf 
+
