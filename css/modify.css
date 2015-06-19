@@ -27,3 +27,8 @@ a:visited {
 
 .pagination {
   text-align: center; }
+
+.post-content h3 {
+  font-size: 23px;
+  margin-bottom: 20px;
+  font-weight: bold; }

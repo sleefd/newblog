@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>慎独</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>修改jekyll默认样式</title>
+  <meta name="description" content="jekyll默认模板代码高亮不太好看，posts显示也没有分页,可以对默认样式做一些简单的修改:">
 
   <link rel="stylesheet" href="/newblog/css/main.css">
   <link rel="stylesheet" href="/newblog/css/monokai.css">
   <link rel="stylesheet" href="/newblog/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -61,60 +60,70 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">POSTS</h1>
+  <header class="post-header">
+    <h1 class="post-title">修改jekyll默认样式</h1>
+    <p class="post-meta">Jun 19, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/2015/06/19/customize-jekyll-default-style.html">修改jekyll默认样式</a>
-          
-        <span class="post-meta">Jun 19, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/16/python-docstring.html">python docstring使用</a>
-          
-        <span class="post-meta">Feb 16, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/15/match-roman-number-with-regex.html">正则表达式匹配罗马数字</a>
-          
-        <span class="post-meta">Feb 15, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/07/yield-and-decorator.html">python yield、decorator 与可变参数</a>
-          
-        <span class="post-meta">Feb 7, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/mahout/2015/01/08/testnaivebayes-prob.html">修改mahout naivebayes test driver遇到问题</a>
-          
-        <span class="post-meta">Jan 8, 2015</span>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>jekyll默认模板代码高亮不太好看，posts显示也没有分页,可以对默认样式做一些简单的修改:</p>
 
-<!-- Pagination links -->
-  <div class="pagination">
-    
-      <span class="previous">Previous</span>
-    
-    <span class="page_number">|</span>
-<!--     <span class="page_number ">Page: 1 of 2</span>
- -->    
-      <a href="/newblog/page2" class="next">Next</a>
-    
-  </div>
+<p>修改代码高亮, 添加分页， 改变css来个性化博客.</p>
+
+<h3 id="section">代码高亮</h3>
+
+<p>jekyll代码高亮默认采用github的代码高亮css,即是_sass目录下的_syntax-highlighting.scss文件，</p>
+
+<p>采用scss编写。改变代码高亮需要修改该文件或者添加额外的css覆盖原样式。jekyll支持通过pygments</p>
+
+<p>插件来实现代码高亮,pygment可生成不同主题的css文件或直接对某段代码实现高亮。</p>
+
+<ul>
+  <li>安装Pygments. pygments是一个Python package，可通过pip安装：</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">python -m pip install pygments</code></pre></div>
+
+<ul>
+  <li>生成theme对应的css文件。可通过执行pygmentize脚本来生成css文件。</li>
+</ul>
+
+<p>win下需要把python安装目录下的scripts文件夹添加到path环境变量.</p>
+
+<p>我比较喜欢monokai主题,配上黑色很好看。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pygmentize -S monokai -f html &gt; monokai.css</code></pre></div>
+
+<p>然后将css文件拷贝到工程css目录并将该文件include到head.html中即可。</p>
+
+<p>以后所有html文件都将应用该样式.</p>
+
+<ul>
+  <li>_config.yml中将highligher设置为pygments即可.</li>
+</ul>
+
+<h3 id="navigation">添加分页及页面navigation</h3>
+
+<p>_config.yml配置paginate为每页想展现的posts条目数，</p>
+
+<p>参照<a href="http://jekyllrb.com/docs/pagination/">jekyll</a>官网的写法，将yml代码粘贴index.html中，就能实现post list分页及导航。                                                                                                           </p>
+
+<h3 id="section-1">修改样式</h3>
+
+<p>样式修改可以通过直接修改_sass文件夹中的scss文件或添加额外的scss或css文件，</p>
+
+<p>再include到html页面中。</p>
+
+<p>css文件和scss文件都需要放到css文件夹中,scss在build的时候会自动编译为对应的</p>
+
+<p>css文件，都可以直接在html中include。如果将scss文件放到sass文件夹中，必须被css</p>
+
+<p>目录下的scss文件import才会被编译生效。</p>
+
+  </article>
+
 </div>
 
       </div>
