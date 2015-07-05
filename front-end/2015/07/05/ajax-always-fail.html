@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>慎独</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>ajax总是调用error handle</title>
+  <meta name="description" content="做进度条展示状态遇到一个问题:发一个ajax请求，轮询后台状态，如果后台出现异常，在error回调中clearTimeout,结果error总是被调用，轮询总是被终止。">
 
   <link rel="stylesheet" href="/newblog/css/main.css">
   <link rel="stylesheet" href="/newblog/css/monokai.css">
   <link rel="stylesheet" href="/newblog/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -61,60 +60,28 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">POSTS</h1>
+  <header class="post-header">
+    <h1 class="post-title">ajax总是调用error handle</h1>
+    <p class="post-meta">Jul 5, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/front-end/2015/07/05/ajax-always-fail.html">ajax总是调用error handle</a>
-          
-        <span class="post-meta">Jul 5, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/2015/06/19/customize-jekyll-default-style.html">修改jekyll默认样式</a>
-          
-        <span class="post-meta">Jun 19, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/16/python-docstring.html">python docstring使用</a>
-          
-        <span class="post-meta">Feb 16, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/15/match-roman-number-with-regex.html">正则表达式匹配罗马数字</a>
-          
-        <span class="post-meta">Feb 15, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/07/yield-and-decorator.html">python yield、decorator 与可变参数</a>
-          
-        <span class="post-meta">Feb 7, 2015</span>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>做进度条展示状态遇到一个问题:发一个ajax请求，轮询后台状态，如果后台
+出现异常，在error回调中clearTimeout,结果error总是被调用，轮询总是
+被终止。</p>
 
-<!-- Pagination links -->
-  <div class="pagination">
-    
-      <span class="previous">Previous</span>
-    
-    <span class="page_number">|</span>
-<!--     <span class="page_number ">Page: 1 of 2</span>
- -->    
-      <a href="/newblog/page2" class="next">Next</a>
-    
-  </div>
+<p>浏览器调试，network请求显示成功，服务端spring controller也没出现任何
+错误或异常，但前端error总是被call。查stackoverflow发现是dataType问题。</p>
+
+<p>ajax期望返回的是json数据，但spring controller返回void，response什么
+也没有，response与期望返回类型不一致导致always error，ajax 去掉dataType
+设置，让浏览器自行推断类型，就没有问题了。</p>
+
+
+  </article>
+
 </div>
 
       </div>

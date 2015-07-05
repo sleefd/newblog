@@ -6,9 +6,32 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 19 Jun 2015 20:41:59 +0800</pubDate>
-    <lastBuildDate>Fri, 19 Jun 2015 20:41:59 +0800</lastBuildDate>
+    <pubDate>Sun, 05 Jul 2015 14:15:52 +0800</pubDate>
+    <lastBuildDate>Sun, 05 Jul 2015 14:15:52 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>ajax总是调用error handle</title>
+        <description>&lt;p&gt;做进度条展示状态遇到一个问题:发一个ajax请求，轮询后台状态，如果后台
+出现异常，在error回调中clearTimeout,结果error总是被调用，轮询总是
+被终止。&lt;/p&gt;
+
+&lt;p&gt;浏览器调试，network请求显示成功，服务端spring controller也没出现任何
+错误或异常，但前端error总是被call。查stackoverflow发现是dataType问题。&lt;/p&gt;
+
+&lt;p&gt;ajax期望返回的是json数据，但spring controller返回void，response什么
+也没有，response与期望返回类型不一致导致always error，ajax 去掉dataType
+设置，让浏览器自行推断类型，就没有问题了。&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 05 Jul 2015 13:04:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html</guid>
+        
+        
+        <category>front-end</category>
+        
+      </item>
     
       <item>
         <title>修改jekyll默认样式</title>
