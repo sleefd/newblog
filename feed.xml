@@ -6,9 +6,136 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 05 Jul 2015 14:15:52 +0800</pubDate>
-    <lastBuildDate>Sun, 05 Jul 2015 14:15:52 +0800</lastBuildDate>
+    <pubDate>Fri, 21 Aug 2015 11:04:43 +0800</pubDate>
+    <lastBuildDate>Fri, 21 Aug 2015 11:04:43 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>git相关操作</title>
+        <description>&lt;p&gt;平时自用git涉及不到什么高级的用法，因为也就一个人开发。
+最近工作上用gerrit提交代码, 遇到很多问题, 发现对git的有些
+操作并不了解，现总结一些问题及命令如下：&lt;/p&gt;
+
+&lt;h3 id=&quot;pullgit-review-pullpush&quot;&gt;每次提交代码都应该先pull，再git review; 或者先pull，再push.&lt;/h3&gt;
+&lt;p&gt;pull保证本地代码与remote一致，再push自己本地的修改到remote,这样不会有冲突。&lt;/p&gt;
+
+&lt;p&gt;直接push很可能有冲突。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git pull origin master
+&lt;span class=&quot;c&quot;&gt;### other operations&lt;/span&gt;
+git push origin master&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;git-commit---amend-amend&quot;&gt;git commit –amend, amend上一次提交，不会产生新提交&lt;/h3&gt;
+&lt;p&gt;可用于重新修改comment，或修改上一次提交的文件内容，只是再次commit
+时要加上–amend选项。&lt;/p&gt;
+
+&lt;h3 id=&quot;git-add&quot;&gt;丢弃git add到暂存区的文件修改&lt;/h3&gt;
+
+&lt;p&gt;有三种方法，一是在原文件上修改后重新add，staged的相同文件就会被覆盖;&lt;/p&gt;
+
+&lt;p&gt;另一种方法是reset head;&lt;/p&gt;
+
+&lt;p&gt;还可以重新checkout该文件，那么工作区中该文件就会回到未修改之前的状态，再在上面做修改后add.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git reset head filename &lt;span class=&quot;c&quot;&gt;## unstaged filename&lt;/span&gt;
+git reset head &lt;span class=&quot;c&quot;&gt;# unstaged all the files&lt;/span&gt;
+git checkout -- filename &lt;span class=&quot;c&quot;&gt;# reset file in the workspace&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;git-reset-&quot;&gt;git reset, 重置到某次提交&lt;/h3&gt;
+&lt;p&gt;提交多次后，想回到某次提交的状态，可以使用reset，
+reset之后，该次提交之后的所有提交都木有了。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# reset to last second commit,&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# all the modified in head return to workspace&lt;/span&gt;
+git reset head~1 
+
+&lt;span class=&quot;c&quot;&gt;# reset to last second commit,all the modified are discarded&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# workspce is clean&lt;/span&gt;
+git reset head~1 --hard&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;git-revert-commit-revertcommit&quot;&gt;git revert commit, revert某次commit，&lt;/h3&gt;
+
+&lt;p&gt;会产生一次新的提交，新的提交重置commit的内容&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# revert head, produce a new commit &amp;quot;revert&amp;quot;&lt;/span&gt;
+git revert head  
+
+&lt;span class=&quot;c&quot;&gt;#git revert commit of SHA&lt;/span&gt;
+git revert COMMIT_SHA&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;git-stashclean&quot;&gt;git stash可缓存工作区的内容到一个栈中，让工作区恢复到clean状态。&lt;/h3&gt;
+
+&lt;p&gt;可通过git stash apply或git stash pop来恢复最后被暂存的东西（位于栈顶）。&lt;/p&gt;
+
+&lt;p&gt;注意untrack的文件还在workspace中。&lt;/p&gt;
+
+&lt;p&gt;当需要从一个分支切换到另一个分支而有不想commit当前工作内容，可以先stash，
+然后切换分支。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git stash
+git checkout master 
+&lt;span class=&quot;c&quot;&gt;### do sth&lt;/span&gt;
+git checkout dev
+git stash apply &lt;span class=&quot;c&quot;&gt;# get back what u are doing &lt;/span&gt;
+
+git stash list &lt;span class=&quot;c&quot;&gt;# review all the stashed content&lt;/span&gt;
+git stash apply stash@&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#choose last second stash apply&lt;/span&gt;
+git stash pop &lt;span class=&quot;c&quot;&gt;#apply stash and remove the stash from stash list&lt;/span&gt;
+git stash clear &lt;span class=&quot;c&quot;&gt;#clear stashes in stash list&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rebasemastercommitreview&quot;&gt;新特性在分支开发，开发完毕后，rebase到master，可保证分支的每次commit，都可以review。&lt;/h3&gt;
+
+&lt;p&gt;对于较复杂的feature开发，肯定会有多次commit，gerrit分支上的每次commit也会产生changeID, 分支rebase到最新的master,
+然后git review，会把所有逻辑化的commit按顺序提交到gerrit进行review,
+并且rebase后master的commit历史是线性的不会出现分叉。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git pull origin master &lt;span class=&quot;c&quot;&gt;# update master &lt;/span&gt;
+
+git checkout -b feature
+&lt;span class=&quot;c&quot;&gt;## multiple times modify or add &lt;/span&gt;
+git add 
+git commit  
+
+git rebase master &lt;span class=&quot;c&quot;&gt;##fast merge or fix confilcts&lt;/span&gt;
+git checkout master
+git merge feature&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mergepullrebase-&quot;&gt;冲突解决，merge、pull、rebase都可能会有冲突， 冲突解决之后，才能继续操作。&lt;/h3&gt;
+
+&lt;p&gt;出现冲突，可先用git status查看有哪些文件冲突，然后一次修改这些文件。&lt;/p&gt;
+
+&lt;p&gt;冲突的地方在«« 与 »»之间，中间由=====分隔开，上下分别代表不同commit的修改内容。&lt;/p&gt;
+
+&lt;p&gt;解决冲突可采取接纳你的代码或其他人的代码或合并的方式，解决完之后重新commit.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git status  &lt;span class=&quot;c&quot;&gt;### check unmerged conflict files&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;### fix conflicts&lt;/span&gt;
+git add .  &lt;span class=&quot;c&quot;&gt;### stage modified files&lt;/span&gt;
+git commit -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;fix conflicts&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## commit, fix conflicts over&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;git-detached-head&quot;&gt;git detached head&lt;/h3&gt;
+
+&lt;p&gt;出现detached head是由于checkout了非head的commit，
+git checkout master后就没有了&lt;/p&gt;
+
+&lt;h3 id=&quot;git-rebase--i&quot;&gt;git rebase -i,交互式变基，非常强大的功能&lt;/h3&gt;
+&lt;p&gt;可重新组织commit的提交顺序，修改commit，拆分commit，
+目前只会简单使用。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git rebase -i commit &lt;span class=&quot;c&quot;&gt;## appear a vim editor contains all the commits after the commit&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;### do some edit, modify pick to edit，you can edit the commit &lt;/span&gt;
+git rebase --continue &lt;span class=&quot;c&quot;&gt;## continue rebase, until end the rebase&lt;/span&gt;
+git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops are canceled&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Thu, 20 Aug 2015 16:37:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html</guid>
+        
+        
+        <category>learn</category>
+        
+      </item>
     
       <item>
         <title>ajax总是调用error handle</title>
@@ -448,42 +575,6 @@ remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,mas
         <link>http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</link>
         <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>octopress博客迁移到新电脑</title>
-        <description>&lt;p&gt;本来是用octopress写博客，但是上班换了新电脑，需要在新电脑上重新部署octopress。&lt;/p&gt;
-
-&lt;p&gt;首先clone下source分支的代码,然后clone master分支的代码到_deploy文件夹中。master分支存放的是渲染后的博客，source分支存放的是octopress代码以及主题等。github访问xx.github.com，访问的就是该repo下的master分支代码。&lt;/p&gt;
-
-&lt;p&gt;重新部署的时候遇到下面几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;source分支的代码从来没有上传过， github上只保存有最新的master分支的文件。&lt;/li&gt;
-  &lt;li&gt;rake new_post，然后rake deploy之后，_deploy文件夹被清空，然后重新生成，导致原来的所有post遗失。&lt;/li&gt;
-  &lt;li&gt;所有post的markdown文件遗失，无法重新生成所有的html文件。如果源markdown没有遗失，啥事都没有，哎。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;尝试过这样一些解决方法：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;修改Rakefile，修改push task，每次push都不删除deploy文件，不行。因为new_post会产生新的index.html和sitemap，虽然保留有旧的post html，但没法从index.html访问到。&lt;/li&gt;
-  &lt;li&gt;复制deploy中的文件到source文件夹中，因为source文件夹缺少一些资源，还是不行。rake generate的时候，没有更新index.html。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;稍后有时间再试一试方法2，可以先把资源拷贝到source里面，然后修改index，保有原来的post链接，新链接可添加在index里面。如果还是不行的话，就只能写个脚本调用pandoc将html转化成markdown，然后再把所有post的markdown丢到soure的post文件夹下面了。&lt;/p&gt;
-
-&lt;p&gt;这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作,怎样阅读diff文件等等。决定抽时间看git pro，系统的学习一下git的操作。&lt;/p&gt;
-</description>
-        <pubDate>Tue, 30 Dec 2014 04:35:27 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
