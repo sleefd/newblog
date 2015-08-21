@@ -6,8 +6,8 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 21 Aug 2015 11:04:43 +0800</pubDate>
-    <lastBuildDate>Fri, 21 Aug 2015 11:04:43 +0800</lastBuildDate>
+    <pubDate>Fri, 21 Aug 2015 11:22:51 +0800</pubDate>
+    <lastBuildDate>Fri, 21 Aug 2015 11:22:51 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -16,7 +16,7 @@
 最近工作上用gerrit提交代码, 遇到很多问题, 发现对git的有些
 操作并不了解，现总结一些问题及命令如下：&lt;/p&gt;
 
-&lt;h3 id=&quot;pullgit-review-pullpush&quot;&gt;每次提交代码都应该先pull，再git review; 或者先pull，再push.&lt;/h3&gt;
+&lt;h3 id=&quot;pullgit-review-pullpush&quot;&gt;每次提交代码都应该先pull，再git review; 或者先pull，再push&lt;/h3&gt;
 &lt;p&gt;pull保证本地代码与remote一致，再push自己本地的修改到remote,这样不会有冲突。&lt;/p&gt;
 
 &lt;p&gt;直接push很可能有冲突。&lt;/p&gt;
@@ -53,7 +53,7 @@ git reset head~1
 &lt;span class=&quot;c&quot;&gt;# workspce is clean&lt;/span&gt;
 git reset head~1 --hard&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;git-revert-commit-revertcommit&quot;&gt;git revert commit, revert某次commit，&lt;/h3&gt;
+&lt;h3 id=&quot;git-revert-commit-revertcommit&quot;&gt;git revert commit, revert某次commit&lt;/h3&gt;
 
 &lt;p&gt;会产生一次新的提交，新的提交重置commit的内容&lt;/p&gt;
 
@@ -63,7 +63,7 @@ git revert head
 &lt;span class=&quot;c&quot;&gt;#git revert commit of SHA&lt;/span&gt;
 git revert COMMIT_SHA&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;git-stashclean&quot;&gt;git stash可缓存工作区的内容到一个栈中，让工作区恢复到clean状态。&lt;/h3&gt;
+&lt;h3 id=&quot;git-stashclean&quot;&gt;git stash可缓存工作区的内容到一个栈中，让工作区恢复到clean状态&lt;/h3&gt;
 
 &lt;p&gt;可通过git stash apply或git stash pop来恢复最后被暂存的东西（位于栈顶）。&lt;/p&gt;
 
@@ -83,7 +83,7 @@ git stash apply stash@&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;2&lt;span cl
 git stash pop &lt;span class=&quot;c&quot;&gt;#apply stash and remove the stash from stash list&lt;/span&gt;
 git stash clear &lt;span class=&quot;c&quot;&gt;#clear stashes in stash list&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;rebasemastercommitreview&quot;&gt;新特性在分支开发，开发完毕后，rebase到master，可保证分支的每次commit，都可以review。&lt;/h3&gt;
+&lt;h3 id=&quot;rebasemastercommitreview&quot;&gt;新特性在分支开发，开发完毕后，rebase到master，可保证分支的每次commit，都可以review&lt;/h3&gt;
 
 &lt;p&gt;对于较复杂的feature开发，肯定会有多次commit，gerrit分支上的每次commit也会产生changeID, 分支rebase到最新的master,
 然后git review，会把所有逻辑化的commit按顺序提交到gerrit进行review,
@@ -100,7 +100,7 @@ git rebase master &lt;span class=&quot;c&quot;&gt;##fast merge or fix confilcts&
 git checkout master
 git merge feature&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;mergepullrebase-&quot;&gt;冲突解决，merge、pull、rebase都可能会有冲突， 冲突解决之后，才能继续操作。&lt;/h3&gt;
+&lt;h3 id=&quot;mergepullrebase-&quot;&gt;冲突解决，merge、pull、rebase都可能会有冲突， 冲突解决之后，才能继续操作&lt;/h3&gt;
 
 &lt;p&gt;出现冲突，可先用git status查看有哪些文件冲突，然后一次修改这些文件。&lt;/p&gt;
 
