@@ -10,7 +10,7 @@ categories: learn
 最近工作上用gerrit提交代码, 遇到很多问题, 发现对git的有些
 操作并不了解，现总结一些问题及命令如下：
 
-### 每次提交代码都应该先pull，再git review; 或者先pull，再push. 
+### 每次提交代码都应该先pull，再git review; 或者先pull，再push 
 pull保证本地代码与remote一致，再push自己本地的修改到remote,这样不会有冲突。
 
 直接push很可能有冲突。
@@ -55,7 +55,7 @@ git reset head~1 --hard
 
 {% endhighlight %}
 
-### git revert commit, revert某次commit，
+### git revert commit, revert某次commit
 
 会产生一次新的提交，新的提交重置commit的内容
 
@@ -69,7 +69,7 @@ git revert COMMIT_SHA
 
 {% endhighlight %}
 
-### git stash可缓存工作区的内容到一个栈中，让工作区恢复到clean状态。
+### git stash可缓存工作区的内容到一个栈中，让工作区恢复到clean状态
 
 可通过git stash apply或git stash pop来恢复最后被暂存的东西（位于栈顶）。
 
@@ -93,7 +93,7 @@ git stash clear #clear stashes in stash list
 
 {% endhighlight %}
 
-### 新特性在分支开发，开发完毕后，rebase到master，可保证分支的每次commit，都可以review。
+### 新特性在分支开发，开发完毕后，rebase到master，可保证分支的每次commit，都可以review
 
 对于较复杂的feature开发，肯定会有多次commit，gerrit分支上的每次commit也会产生changeID, 分支rebase到最新的master,
 然后git review，会把所有逻辑化的commit按顺序提交到gerrit进行review,
@@ -113,7 +113,7 @@ git merge feature
 
 {% endhighlight %}
 
-### 冲突解决，merge、pull、rebase都可能会有冲突， 冲突解决之后，才能继续操作。
+### 冲突解决，merge、pull、rebase都可能会有冲突， 冲突解决之后，才能继续操作
 
 出现冲突，可先用git status查看有哪些文件冲突，然后一次修改这些文件。
 
