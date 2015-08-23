@@ -6,9 +6,60 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 21 Aug 2015 11:22:51 +0800</pubDate>
-    <lastBuildDate>Fri, 21 Aug 2015 11:22:51 +0800</lastBuildDate>
+    <pubDate>Sun, 23 Aug 2015 11:53:03 +0800</pubDate>
+    <lastBuildDate>Sun, 23 Aug 2015 11:53:03 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>win下sqoop1.99.6编译</title>
+        <description>&lt;p&gt;sqoop使用maven进行项目构建，所以按照maven的构建方式编译源码即可，
+官网也有说明编译步骤。&lt;/p&gt;
+
+&lt;p&gt;编译过程中遇到一些小问题，一并记录在次。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;下载源码&lt;/h3&gt;
+&lt;p&gt;clone github上sqoop的源码，可以看到很多分支，现在working的sqoop分支是sqoop2，
+因为要编译1.99.6，所以直接checkout branch-1.99.6&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/apache/sqoop.git
+git branch -a &lt;span class=&quot;c&quot;&gt;# show all the branches&lt;/span&gt;
+git checkout branch-1.99.6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;编译源码&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn compile -DskipTests &lt;span class=&quot;c&quot;&gt;# compile, skip tests, fast compile speed&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;编译到common包，执行saveVersion.sh遇到问题”invalid escape character \”.&lt;/p&gt;
+
+&lt;p&gt;saveVersion.sh生成package-info.java文件中的注解。
+打开生成的package-info.java一开，发现user字符串的内容为”slee\sleefd”,
+显然在java中是非法字符串，可以改为&lt;code&gt;\\&lt;/code&gt;或直接改为&lt;code&gt;/&lt;/code&gt;即可,继续
+编译ok。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;打包发布&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn package -Dbinary -DskipTests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;安装&lt;/h3&gt;
+&lt;p&gt;安装包在dist/target目录中.具体安装方式可参考官方安装文档，但win下编译的代码在linux下使用会遇到问题：&lt;/p&gt;
+
+&lt;p&gt;tar.gz包传到linux上后解压，配置完毕，运行bin目录下的shell脚本，terminal提示
+&lt;strong&gt;no such file or direcotory&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;这是由于这些shell脚本都是dos格式，不是unix格式，可vim打开后，通过 :set ff，
+查看文件格式，把这些shell脚本转为unix格式，问题解决。&lt;/p&gt;
+
+&lt;p&gt;可执行命令dos2unix，完成转换. linux下需要安装了该命令才能使用，win下git的
+bash自带该命令，估计cygwin也有这个命令。解决该问题后可成功启动sqoop2-server.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 21 Aug 2015 12:47:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog/bigdata/2015/08/21/sqoop-compile.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/bigdata/2015/08/21/sqoop-compile.html</guid>
+        
+        
+        <category>bigdata</category>
+        
+      </item>
     
       <item>
         <title>git相关操作</title>
@@ -537,44 +588,6 @@ StringBuilder不是线程安全的。&lt;/li&gt;
         
         
         <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>重新用jekyll写博客</title>
-        <description>&lt;p&gt;在windows上安装octopress遇到一些问题，如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;我安装的是ruby2.0，但gemfile.lock中的ffi版本太低，无法本地编译ffi，修改gemfile中的ffi为高版本就可以了。&lt;/li&gt;
-  &lt;li&gt;bundle install成功后，rake generate提示iconv找不到, 原来ruby2.0, iconv module被deprecated，没办法，ruby2.0安装octopress不成功，除非修改rakefile，将用到iconv的地方换成其他库。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;最后决定回归本真，还是用jekyll，ruby2.0直接&lt;code&gt;gem install jekyll&lt;/code&gt;就ok了，无任何问题。&lt;/p&gt;
-
-&lt;p&gt;仔细阅读了下jekyll官网文档，知道了原来github任意repo的ghpage分支也能用来部署website，只要把
-website代码push到repo的ghpage分支，然后通过yourname.github.com/repo-name就可以访问到。这样就太好了,
-原来的博客可保留在&lt;a href=&quot;http://sleefd.github.com&quot;&gt;sleefd.github.com&lt;/a&gt;链接，新jekyll博客在&lt;a href=&quot;http://sleefd.github.com/newblog&quot;&gt;sleefd.github.com/newblog&lt;/a&gt;。最后我的github repo是这样的:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;repo name: newblog, 于是我可以通过sleefd.gihtub.io/newblog，来访问我新部署的jekyll blog.
-remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,master跟踪其他所有文件夹.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;jekyll使用时遇到的两个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;开始我github新建的repo名字为blog，导致原博客的post无法访问，是因为原博客的post访问链接以sleefd.github.io/blog开始，新jekyll博客也是，名字冲突，改repo名为newblog就好了。&lt;/li&gt;
-  &lt;li&gt;jekyll serve 无法在localhost:4000预览博客内容，部署后也无法在newblog链接访问新post内容。看jekyll官网文档解决。修改_config.yml中的baseurl为’/newblog’,启动server命令改为&lt;code&gt;jekyll serve --baseurl &#39;&#39;&lt;/code&gt;即可。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;另外jekyll不像octopress那样, 可以直接执行rake task来创建新post和部署博客到github，于是把Octopress中的Rakefile拿过来改改，就可通过&lt;code&gt;rake post[&#39;title&#39;]&lt;/code&gt;创建新post，通过&lt;code&gt;rake deploy&lt;/code&gt;同步source和gh-pages代码到远程的github repo。附上Rakefile如下：&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/0ec44f5202e4f864e4a5.js&quot;&gt; &lt;/script&gt;
-
-</description>
-        <pubDate>Fri, 02 Jan 2015 18:07:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html</guid>
-        
         
       </item>
     
