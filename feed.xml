@@ -6,8 +6,8 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 23 Aug 2015 11:53:03 +0800</pubDate>
-    <lastBuildDate>Sun, 23 Aug 2015 11:53:03 +0800</lastBuildDate>
+    <pubDate>Sun, 23 Aug 2015 12:03:15 +0800</pubDate>
+    <lastBuildDate>Sun, 23 Aug 2015 12:03:15 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -29,7 +29,7 @@ git checkout branch-1.99.6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn compile -DskipTests &lt;span class=&quot;c&quot;&gt;# compile, skip tests, fast compile speed&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;编译到common包，执行saveVersion.sh遇到问题”invalid escape character \”.&lt;/p&gt;
+&lt;p&gt;编译到common包，执行saveVersion.sh遇到问题&lt;strong&gt;invalid escape character \&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;saveVersion.sh生成package-info.java文件中的注解。
 打开生成的package-info.java一开，发现user字符串的内容为”slee\sleefd”,
