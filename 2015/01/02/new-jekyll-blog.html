@@ -9,11 +9,11 @@
   <title>重新用jekyll写博客</title>
   <meta name="description" content="在windows上安装octopress遇到一些问题，如下：">
 
-  <link rel="stylesheet" href="/newblog/css/main.css">
-  <link rel="stylesheet" href="/newblog/css/monokai.css">
-  <link rel="stylesheet" href="/newblog/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/2015/01/02/new-jekyll-blog.html">
-  <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/monokai.css">
+  <link rel="stylesheet" href="/css/modify.css">
+  <link rel="canonical" href="http://sleefd.github.io/2015/01/02/new-jekyll-blog.html">
+  <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/feed.xml" />
 </head>
 
 
@@ -23,7 +23,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/newblog/">慎独</a>
+    <a class="site-title" href="/">慎独</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -37,7 +37,7 @@
       <div class="trigger">
         
           
-          <a class="page-link" href="/newblog/about/">About</a>
+          <a class="page-link" href="/about/">About</a>
           
         
           
@@ -96,6 +96,8 @@ remote branch: master与gh-pages,其中gh-pages跟踪_site文件夹的内容,mas
 
 <p>另外jekyll不像octopress那样, 可以直接执行rake task来创建新post和部署博客到github，于是把Octopress中的Rakefile拿过来改改，就可通过<code>rake post['title']</code>创建新post，通过<code>rake deploy</code>同步source和gh-pages代码到远程的github repo。附上Rakefile如下：</p>
 
+<noscript><pre>400: Invalid request
+</pre></noscript>
 <script src="https://gist.github.com/0ec44f5202e4f864e4a5.js"> </script>
 
 

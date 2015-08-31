@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>慎独</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>git fork工作流</title>
+  <meta name="description" content="项目代码库开始和gerrit关联，用gerrit做code review，然后又突然换成自建的gitlab，然后就有了这篇文章.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/monokai.css">
   <link rel="stylesheet" href="/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/page2/">
+  <link rel="canonical" href="http://sleefd.github.io/learn/2015/08/28/mod-git-remote.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/feed.xml" />
 </head>
 
@@ -63,60 +62,49 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">POSTS</h1>
+  <header class="post-header">
+    <h1 class="post-title">git fork工作流</h1>
+    <p class="post-meta">Aug 28, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/python/2015/02/16/python-docstring.html">python docstring使用</a>
-          
-        <span class="post-meta">Feb 16, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/python/2015/02/15/match-roman-number-with-regex.html">正则表达式匹配罗马数字</a>
-          
-        <span class="post-meta">Feb 15, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/python/2015/02/07/yield-and-decorator.html">python yield、decorator 与可变参数</a>
-          
-        <span class="post-meta">Feb 7, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/mahout/2015/01/08/testnaivebayes-prob.html">修改mahout naivebayes test driver遇到问题</a>
-          
-        <span class="post-meta">Jan 8, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/python/2015/01/06/scikit-learn-install.html">python scikit-learn安装</a>
-          
-        <span class="post-meta">Jan 6, 2015</span>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>项目代码库开始和gerrit关联，用gerrit做code review，然后又突然换成自建的gitlab，
+然后就有了这篇文章.</p>
 
-<!-- Pagination links -->
-  <div class="pagination">
-    
-      <a href="/index.html" class="previous">Previous</a>
-    
-    <span class="page_number">|</span>
-<!--     <span class="page_number ">Page: 2 of 3</span>
- -->    
-      <a href="/page3" class="next">Next</a>
-    
-  </div>
+<p>换成gitlab之后，需要以fork/pull request的方式提交代码,code review，因此
+有必要了解git fork工作流.
+(zz: gitlab-&gt;gitlab-&gt;gerrit-gitlab，这样换来换去有意思吗,呵呵,遇到commit问题，从来不想着方法去解决，而是更换版本控制工具也是醉了)</p>
+
+<p>首先fork central repo，这样自己的gitlab projects下就多了一个central repo的副本，后续的提交都应该提交到每个人自己的repo，
+而不能提交到central repo. 这也是fork工作流的好处，控制central repo的访问权限，不会有任何人的commits污染整个项目.</p>
+
+<p>其次, 我的本地仓库在gerrit时代已经有了，上面也包含几个我正在开发新特性的分支，所以不可能clone我的gitlab repo重新开发。
+因此第一步需要更换master branch的remote为新gitlab仓库的地址. 有两种方法:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># add remote and modify master branch&#39;s remote to the new remote</span>
+git remote add gitlab repo-git-url 
+git config branch.master.remote  gitlab
+
+<span class="c"># or change old remote url directly, suppose origin the old remote</span>
+git remote <span class="nb">set</span>-url origin repo-git-url</code></pre></div>
+
+<p>这样后续push可以直接到gitlab上的repo里，而remote对应的也是master分支，不会
+出现your head is ahead of master xx commits这种提示.</p>
+
+<p>然后后续开发还是以分支开发的形式就行，每个新特性开发对应一个branch, 单独在这个branch  <br />
+commit代码.</p>
+
+<p>然后怎么code review呢,发pull request就行了，俗称pr.
+gitlab是merge request，github是pull request。
+选择自己项目的分支以及central对应的分支名称，@相关人员就ok了。</p>
+
+<hr />
+<p>有感：怎么样的环境就有什么样的坑爹事情发生，爱咋地咋地.</p>
+
+  </article>
+
 </div>
 
       </div>

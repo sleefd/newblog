@@ -4,11 +4,55 @@
     <title>慎独</title>
     <description>博学之，审问之，慎思之，明辨之，笃行之
 </description>
-    <link>http://sleefd.github.io/newblog/</link>
-    <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 23 Aug 2015 12:03:15 +0800</pubDate>
-    <lastBuildDate>Sun, 23 Aug 2015 12:03:15 +0800</lastBuildDate>
+    <link>http://sleefd.github.io/</link>
+    <atom:link href="http://sleefd.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 31 Aug 2015 10:19:17 +0800</pubDate>
+    <lastBuildDate>Mon, 31 Aug 2015 10:19:17 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>git fork工作流</title>
+        <description>&lt;p&gt;项目代码库开始和gerrit关联，用gerrit做code review，然后又突然换成自建的gitlab，
+然后就有了这篇文章.&lt;/p&gt;
+
+&lt;p&gt;换成gitlab之后，需要以fork/pull request的方式提交代码,code review，因此
+有必要了解git fork工作流.
+(zz: gitlab-&amp;gt;gitlab-&amp;gt;gerrit-gitlab，这样换来换去有意思吗,呵呵,遇到commit问题，从来不想着方法去解决，而是更换版本控制工具也是醉了)&lt;/p&gt;
+
+&lt;p&gt;首先fork central repo，这样自己的gitlab projects下就多了一个central repo的副本，后续的提交都应该提交到每个人自己的repo，
+而不能提交到central repo. 这也是fork工作流的好处，控制central repo的访问权限，不会有任何人的commits污染整个项目.&lt;/p&gt;
+
+&lt;p&gt;其次, 我的本地仓库在gerrit时代已经有了，上面也包含几个我正在开发新特性的分支，所以不可能clone我的gitlab repo重新开发。
+因此第一步需要更换master branch的remote为新gitlab仓库的地址. 有两种方法:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# add remote and modify master branch&amp;#39;s remote to the new remote&lt;/span&gt;
+git remote add gitlab repo-git-url 
+git config branch.master.remote  gitlab
+
+&lt;span class=&quot;c&quot;&gt;# or change old remote url directly, suppose origin the old remote&lt;/span&gt;
+git remote &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-url origin repo-git-url&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这样后续push可以直接到gitlab上的repo里，而remote对应的也是master分支，不会
+出现your head is ahead of master xx commits这种提示.&lt;/p&gt;
+
+&lt;p&gt;然后后续开发还是以分支开发的形式就行，每个新特性开发对应一个branch, 单独在这个branch  &lt;br /&gt;
+commit代码.&lt;/p&gt;
+
+&lt;p&gt;然后怎么code review呢,发pull request就行了，俗称pr.
+gitlab是merge request，github是pull request。
+选择自己项目的分支以及central对应的分支名称，@相关人员就ok了。&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;有感：怎么样的环境就有什么样的坑爹事情发生，爱咋地咋地.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 28 Aug 2015 17:28:00 +0800</pubDate>
+        <link>http://sleefd.github.io/learn/2015/08/28/mod-git-remote.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/learn/2015/08/28/mod-git-remote.html</guid>
+        
+        
+        <category>learn</category>
+        
+      </item>
     
       <item>
         <title>win下sqoop1.99.6编译</title>
@@ -53,8 +97,8 @@ git checkout branch-1.99.6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 bash自带该命令，估计cygwin也有这个命令。解决该问题后可成功启动sqoop2-server.&lt;/p&gt;
 </description>
         <pubDate>Fri, 21 Aug 2015 12:47:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/bigdata/2015/08/21/sqoop-compile.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/bigdata/2015/08/21/sqoop-compile.html</guid>
+        <link>http://sleefd.github.io/bigdata/2015/08/21/sqoop-compile.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/bigdata/2015/08/21/sqoop-compile.html</guid>
         
         
         <category>bigdata</category>
@@ -180,8 +224,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 </description>
         <pubDate>Thu, 20 Aug 2015 16:37:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html</guid>
+        <link>http://sleefd.github.io/learn/2015/08/20/git-related.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/learn/2015/08/20/git-related.html</guid>
         
         
         <category>learn</category>
@@ -203,8 +247,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 </description>
         <pubDate>Sun, 05 Jul 2015 13:04:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html</guid>
+        <link>http://sleefd.github.io/front-end/2015/07/05/ajax-always-fail.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/front-end/2015/07/05/ajax-always-fail.html</guid>
         
         
         <category>front-end</category>
@@ -253,7 +297,7 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 &lt;p&gt;_config.yml配置paginate为每页想展现的posts条目数，&lt;/p&gt;
 
-&lt;p&gt;参照&lt;a href=&quot;http://jekyllrb.com/docs/pagination/&quot;&gt;jekyll&lt;/a&gt;官网的写法，将yml代码粘贴index.html中，就能实现post list分页及导航。                                                                                                           &lt;/p&gt;
+&lt;p&gt;参照&lt;a href=&quot;http://jekyllrb.com/docs/pagination/&quot;&gt;jekyll&lt;/a&gt;官网的写法，将yml代码粘贴index.html中，就能实现post list分页及导航。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;修改样式&lt;/h3&gt;
 
@@ -268,8 +312,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 &lt;p&gt;目录下的scss文件import才会被编译生效。&lt;/p&gt;
 </description>
         <pubDate>Fri, 19 Jun 2015 19:21:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html</guid>
+        <link>http://sleefd.github.io/2015/06/19/customize-jekyll-default-style.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/2015/06/19/customize-jekyll-default-style.html</guid>
         
         
       </item>
@@ -309,8 +353,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 &lt;/ol&gt;
 </description>
         <pubDate>Mon, 16 Feb 2015 15:37:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html</guid>
+        <link>http://sleefd.github.io/python/2015/02/16/python-docstring.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/python/2015/02/16/python-docstring.html</guid>
         
         
         <category>python</category>
@@ -397,8 +441,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 </description>
         <pubDate>Sun, 15 Feb 2015 12:23:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</guid>
+        <link>http://sleefd.github.io/python/2015/02/15/match-roman-number-with-regex.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/python/2015/02/15/match-roman-number-with-regex.html</guid>
         
         
         <category>python</category>
@@ -459,16 +503,16 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;参考 &lt;/p&gt;
+&lt;p&gt;参考&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html&quot;&gt;http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html&quot;&gt;http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/index.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/&quot;&gt;http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 07 Feb 2015 20:52:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/02/07/yield-and-decorator.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/07/yield-and-decorator.html</guid>
+        <link>http://sleefd.github.io/python/2015/02/07/yield-and-decorator.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/python/2015/02/07/yield-and-decorator.html</guid>
         
         
         <category>python</category>
@@ -525,8 +569,8 @@ key是text，value也是text。&lt;/p&gt;
 像做app开发一下，一定要做真机测试，不同机型很可能就会有不同问题。&lt;/p&gt;
 </description>
         <pubDate>Thu, 08 Jan 2015 23:18:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/mahout/2015/01/08/testnaivebayes-prob.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/mahout/2015/01/08/testnaivebayes-prob.html</guid>
+        <link>http://sleefd.github.io/mahout/2015/01/08/testnaivebayes-prob.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/mahout/2015/01/08/testnaivebayes-prob.html</guid>
         
         
         <category>mahout</category>
@@ -543,7 +587,7 @@ key是text，value也是text。&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;安装python2.7。&lt;/li&gt;
   &lt;li&gt;安装python包管理工具pip。下载get-pip.py,然后执行&lt;code&gt;python get-pip.py&lt;/code&gt;即可. 输入python -m pip，出现一堆pip命令说明，则安装成功。&lt;/li&gt;
-  &lt;li&gt;安装scikit-learn. &lt;code&gt;python -m pip install -U scikit-learn&lt;/code&gt; &lt;/li&gt;
+  &lt;li&gt;安装scikit-learn. &lt;code&gt;python -m pip install -U scikit-learn&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;安装numpy. 那么问题就来了。开始同样想通过pip install来安装numpy,但一堆问题。这个命令会下载numpy源码包，然后编译，提示vc++编译器找不到。于是根据提示的下载链接下载
 python vc++编译器，重新执行该命令，没问题了，可是该命令一直执行，无任何屏幕输出，卡住了，等了好久都没
 结果出现，于是考虑去官网上下载可执行安装包。在sourceforge上numpy主页找到了安装包列表，但只有win32位的，
@@ -558,36 +602,11 @@ python vc++编译器，重新执行该命令，没问题了，可是该命令一
 各个版本python lib下载列表的这位仁兄。&lt;/p&gt;
 </description>
         <pubDate>Tue, 06 Jan 2015 22:59:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/01/06/scikit-learn-install.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/01/06/scikit-learn-install.html</guid>
+        <link>http://sleefd.github.io/python/2015/01/06/scikit-learn-install.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/python/2015/01/06/scikit-learn-install.html</guid>
         
         
         <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>StringBuffer,StringBuilder与线程安全</title>
-        <description>&lt;p&gt;java里，String是不可变的序列，immutable，每write一次String，实际上创建了一个新String实例。&lt;/p&gt;
-
-&lt;p&gt;而StringBuffer与StringBuilder存储可变的字符序列，mutable,可在原对象上append, remove, instert字符串。
-改变字符串的操作较多时，应该用这两个类代替String类。二者提供的操作函数一致。&lt;/p&gt;
-
-&lt;p&gt;根据api文档， 二者的区别：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;StringBuffer是线程安全的。意味着如果在多线程环境下对它的实例进行操作，不会产生不确定的行为。
-StringBuilder不是线程安全的。&lt;/li&gt;
-  &lt;li&gt;由于StringBuilder不是线程安全的，StringBuilder效率更高。&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sun, 04 Jan 2015 23:56:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/java/2015/01/04/all-about-string.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/java/2015/01/04/all-about-string.html</guid>
-        
-        
-        <category>java</category>
         
       </item>
     
