@@ -16,3 +16,4 @@ highlighter: pygments
 
 # set pagination
 paginate: 5
+encoding: utf-8

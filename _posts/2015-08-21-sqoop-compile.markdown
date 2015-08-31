@@ -27,7 +27,7 @@ git checkout branch-1.99.6
 mvn compile -DskipTests # compile, skip tests, fast compile speed
 {% endhighlight %}
 
-编译到common包，执行saveVersion.sh遇到问题"invalid escape character \\".
+编译到common包，执行saveVersion.sh遇到问题**invalid escape character \\**.
 
 saveVersion.sh生成package-info.java文件中的注解。
 打开生成的package-info.java一开，发现user字符串的内容为"slee\sleefd",
