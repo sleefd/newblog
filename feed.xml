@@ -4,10 +4,10 @@
     <title>慎独</title>
     <description>博学之，审问之，慎思之，明辨之，笃行之
 </description>
-    <link>http://sleefd.github.io/</link>
-    <atom:link href="http://sleefd.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Sep 2015 09:55:54 +0800</pubDate>
-    <lastBuildDate>Thu, 10 Sep 2015 09:55:54 +0800</lastBuildDate>
+    <link>http://sleefd.github.io/newblog/</link>
+    <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 10 Sep 2015 09:58:27 +0800</pubDate>
+    <lastBuildDate>Thu, 10 Sep 2015 09:58:27 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -64,8 +64,8 @@
 &lt;p&gt;参考：&lt;a href=&quot;http://www.studytrails.com/java/json/java-google-json-introduction.jsp&quot;&gt;Gson introduction&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 09 Sep 2015 20:58:00 +0800</pubDate>
-        <link>http://sleefd.github.io/learn/2015/09/09/gson-usage.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/learn/2015/09/09/gson-usage.html</guid>
+        <link>http://sleefd.github.io/newblog/learn/2015/09/09/gson-usage.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/09/09/gson-usage.html</guid>
         
         
         <category>learn</category>
@@ -106,8 +106,8 @@ git push yourremote newbranch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Wed, 09 Sep 2015 19:46:00 +0800</pubDate>
-        <link>http://sleefd.github.io/learn/2015/09/09/git-problem.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/learn/2015/09/09/git-problem.html</guid>
+        <link>http://sleefd.github.io/newblog/learn/2015/09/09/git-problem.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/09/09/git-problem.html</guid>
         
         
         <category>learn</category>
@@ -150,8 +150,8 @@ git push yourremote newbranch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Mon, 31 Aug 2015 14:24:00 +0800</pubDate>
-        <link>http://sleefd.github.io/bigdata/2015/08/31/run-hadoop-local-mode.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/bigdata/2015/08/31/run-hadoop-local-mode.html</guid>
+        <link>http://sleefd.github.io/newblog/bigdata/2015/08/31/run-hadoop-local-mode.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/bigdata/2015/08/31/run-hadoop-local-mode.html</guid>
         
         
         <category>bigdata</category>
@@ -194,8 +194,8 @@ gitlab是merge request，github是pull request。
 &lt;p&gt;有感：怎么样的环境就有什么样的坑爹事情发生，爱咋地咋地.&lt;/p&gt;
 </description>
         <pubDate>Fri, 28 Aug 2015 17:28:00 +0800</pubDate>
-        <link>http://sleefd.github.io/learn/2015/08/28/mod-git-remote.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/learn/2015/08/28/mod-git-remote.html</guid>
+        <link>http://sleefd.github.io/newblog/learn/2015/08/28/mod-git-remote.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/08/28/mod-git-remote.html</guid>
         
         
         <category>learn</category>
@@ -245,8 +245,8 @@ git checkout branch-1.99.6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 bash自带该命令，估计cygwin也有这个命令。解决该问题后可成功启动sqoop2-server.&lt;/p&gt;
 </description>
         <pubDate>Fri, 21 Aug 2015 12:47:00 +0800</pubDate>
-        <link>http://sleefd.github.io/bigdata/2015/08/21/sqoop-compile.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/bigdata/2015/08/21/sqoop-compile.html</guid>
+        <link>http://sleefd.github.io/newblog/bigdata/2015/08/21/sqoop-compile.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/bigdata/2015/08/21/sqoop-compile.html</guid>
         
         
         <category>bigdata</category>
@@ -372,8 +372,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 </description>
         <pubDate>Thu, 20 Aug 2015 16:37:00 +0800</pubDate>
-        <link>http://sleefd.github.io/learn/2015/08/20/git-related.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/learn/2015/08/20/git-related.html</guid>
+        <link>http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html</guid>
         
         
         <category>learn</category>
@@ -395,8 +395,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 </description>
         <pubDate>Sun, 05 Jul 2015 13:04:00 +0800</pubDate>
-        <link>http://sleefd.github.io/front-end/2015/07/05/ajax-always-fail.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/front-end/2015/07/05/ajax-always-fail.html</guid>
+        <link>http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/front-end/2015/07/05/ajax-always-fail.html</guid>
         
         
         <category>front-end</category>
@@ -460,8 +460,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 &lt;p&gt;目录下的scss文件import才会被编译生效。&lt;/p&gt;
 </description>
         <pubDate>Fri, 19 Jun 2015 19:21:00 +0800</pubDate>
-        <link>http://sleefd.github.io/2015/06/19/customize-jekyll-default-style.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/2015/06/19/customize-jekyll-default-style.html</guid>
+        <link>http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html</guid>
         
         
       </item>
@@ -501,8 +501,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 &lt;/ol&gt;
 </description>
         <pubDate>Mon, 16 Feb 2015 15:37:00 +0800</pubDate>
-        <link>http://sleefd.github.io/python/2015/02/16/python-docstring.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/python/2015/02/16/python-docstring.html</guid>
+        <link>http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html</guid>
         
         
         <category>python</category>
@@ -589,8 +589,8 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
 
 </description>
         <pubDate>Sun, 15 Feb 2015 12:23:00 +0800</pubDate>
-        <link>http://sleefd.github.io/python/2015/02/15/match-roman-number-with-regex.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/python/2015/02/15/match-roman-number-with-regex.html</guid>
+        <link>http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</guid>
         
         
         <category>python</category>
