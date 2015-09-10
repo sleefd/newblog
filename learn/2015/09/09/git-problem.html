@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>About</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>git问题again</title>
+  <meta name="description" content="最近又遇到两个git相关的问题，记录在此。">
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/monokai.css">
   <link rel="stylesheet" href="/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/about/">
+  <link rel="canonical" href="http://sleefd.github.io/learn/2015/09/09/git-problem.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/feed.xml" />
 </head>
 
@@ -68,13 +67,40 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">About</h1>
+    <h1 class="post-title">git问题again</h1>
+    <p class="post-meta">Sep 9, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>专注数据挖掘。<br />
-坚持每周两篇记录。<br />
-博学之，审问之，慎思之，明辨之，笃行之。</p>
+    <p>最近又遇到两个git相关的问题，记录在此。</p>
+
+<p>问题1，amend commit之后无法再次push到remote</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git commit
+git push remote branch
+<span class="c">### modify something</span>
+git commit --amend	
+git push remote branch <span class="c"># failed</span></code></pre></div>
+
+<p>push失败是由于同一个commit但内容不同造成的，
+如果这个repo只有你一个人开发，可以强制push:
+<code>git -f push remote branch</code>.
+否则可采取比较dirty的做法，删掉remote branch,
+重新push上去.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git push remote branch :branch <span class="c">#delete remote branch</span>
+git push remote branch  <span class="c"># recreate remote branch</span></code></pre></div>
+
+<p>问题2：如何获取remote新增的branch</p>
+
+<p>情况是这样的，fork了一个remote repo，开始只有一个branch，
+然后remote新增了一个branch，如何获取这个新增的branch，
+可以先pull，然后checkout新branch，再push到自己的remote就可以了。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git pull upstream master
+git remote -v <span class="c"># upstream/newbranch</span>
+git checkout -b upstream/newbranch
+git push yourremote newbranch</code></pre></div>
 
 
   </article>
