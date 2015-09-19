@@ -95,10 +95,10 @@
 
 <h4 id="json">解析复杂复合json对象</h4>
 
-<p>parse json字符串<code> {"name":"slee","columns":[{"name":"a","type":"int"},{"name":"b","type":"int"}]}</code>
-得到columns的所有name值.</p>
+<p>parse json字符串得到columns的所有name值.</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/** three methods to parse above json string */</span>
+<span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="s">&quot;{\&quot;name\&quot;:\&quot;slee\&quot;,\&quot;columns\&quot;:[{\&quot;name\&quot;:\&quot;a\&quot;,\&quot;type\&quot;:\&quot;int\&quot;},{\&quot;name\&quot;:\&quot;b\&quot;,\&quot;type\&quot;:\&quot;int\&quot;}]}&quot;</span><span class="o">;</span>
 <span class="c1">//use fromJson and toJson</span>
 <span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">();</span>
 <span class="n">HashMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">json</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -109,9 +109,34 @@
 	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">));</span>
 <span class="o">}</span>
 
-
 <span class="c1">//use gson streaming api, hard to use, need to be very careful</span>
+<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ByteArrayInputStream</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+<span class="n">JsonReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">JsonReader</span><span class="o">(</span><span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">));</span>
+<span class="n">reader</span><span class="o">.</span><span class="na">beginObject</span><span class="o">();</span>
+<span class="k">while</span><span class="o">(</span><span class="n">reader</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+    <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">nextName</span><span class="o">();</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;columns&quot;</span><span class="o">)){</span>
+	<span class="n">readArray</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>  <span class="c1">//parse column array</span>
+    <span class="o">}</span><span class="k">else</span>
+	<span class="n">reader</span><span class="o">.</span><span class="na">skipValue</span><span class="o">();</span> <span class="c1">//skip no use values，essential</span>
+<span class="o">}</span>
+<span class="n">reader</span><span class="o">.</span><span class="na">endObject</span><span class="o">();</span>
 
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">readArray</span><span class="o">(</span><span class="n">JsonReader</span> <span class="n">reader</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span> <span class="c1">// json array handler</span>
+<span class="n">reader</span><span class="o">.</span><span class="na">beginArray</span><span class="o">();</span>
+<span class="k">while</span><span class="o">(</span><span class="n">reader</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+    <span class="n">reader</span><span class="o">.</span><span class="na">beginObject</span><span class="o">();</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">reader</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+	<span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">nextName</span><span class="o">();</span>
+	<span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">))</span>
+	    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">reader</span><span class="o">.</span><span class="na">nextString</span><span class="o">());</span>
+	<span class="k">else</span>
+	    <span class="n">reader</span><span class="o">.</span><span class="na">skipValue</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="n">reader</span><span class="o">.</span><span class="na">endObject</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="n">reader</span><span class="o">.</span><span class="na">endArray</span><span class="o">();</span>
+<span class="o">}</span>
 
 <span class="c1">//use gson tree api</span>
 <span class="n">JsonParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">JsonParser</span><span class="o">();</span>
