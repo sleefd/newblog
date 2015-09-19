@@ -32,11 +32,11 @@ gson.fromJson(object, type);
 
 #### 解析复杂复合json对象
 
-parse json字符串<code> {"name":"slee","columns":[{"name":"a","type":"int"},{"name":"b","type":"int"}]}</code>
-得到columns的所有name值.
+parse json字符串得到columns的所有name值.
 
 {% highlight java%}
 /** three methods to parse above json string */
+String json = "{\"name\":\"slee\",\"columns\":[{\"name\":\"a\",\"type\":\"int\"},{\"name\":\"b\",\"type\":\"int\"}]}";
 //use fromJson and toJson
 Gson gson = new Gson();
 HashMap map = gson.fromJson(json, HashMap.class);
@@ -47,9 +47,34 @@ for(Object obj: list){ //no need to defined specified class, use object  ok
 	System.out.println(map.get("name"));
 }
 
-
 //use gson streaming api, hard to use, need to be very careful
+InputStream inputStream = new ByteArrayInputStream(json.getBytes());
+JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+reader.beginObject();
+while(reader.hasNext()){
+    String name = reader.nextName();
+    if(name.equals("columns")){
+	readArray(reader);  //parse column array
+    }else
+	reader.skipValue(); //skip no use values，essential
+}
+reader.endObject();
 
+public static void readArray(JsonReader reader) throws IOException { // json array handler
+reader.beginArray();
+while(reader.hasNext()){
+    reader.beginObject();
+    while(reader.hasNext()){
+	String name = reader.nextName();
+	if(name.equals("name"))
+	    System.out.println(reader.nextString());
+	else
+	    reader.skipValue();
+    }
+    reader.endObject();
+}
+reader.endArray();
+}
 
 //use gson tree api
 JsonParser parser = new JsonParser();
