@@ -1,0 +1,44 @@
+---
+layout: post
+title: "log4j 1.x一瞥"
+date: 2015-09-19 22:14
+comments: true
+categories: learn
+---
+log4j，常用的日志库，用的很多但并不是特别了解，因此细学习了官方文档，
+以便日后使用时不会有所困惑。
+
+log4j有四个重要的概念：logger,level,appender,layout，了解这四个基本概念
+就能知道如何使用log4j.
+
+#### logger
+  logger负责输出日志，可调用info/debug等方法输出不同级别的日志。不同的方法对应
+不同的级别请求，比如调用info则输出info级别的日志。
+
+logger之间有存在继承关系，如果logger没定义级别，则继承父亲所定义的级别，RootLogger是所有logger的基类。
+
+#### level
+  级别用于分级显示日志，不同级别输出不同的日志内容。级别请求相比于logger级别高则会输出。级别从低到高排序如下：
+  trace<info<debug<warn<error<fatal，因此级别若设置为trace,则所有的log请求都会输出。
+
+#### appender
+  appender用于定义日志的输出位置，可以是console, 可以是文件，也可以是远程socket等。且可定义
+多个，则会同时输出到多个位置。
+
+#### layout
+  layout用于定义输出的日志格式，由格式化字符串指定。
+
+#### 使用
+可直接在代码中定义logger，也可以由log4j.properties配置文件配置logger。
+
+#### demo
+log4j.properties配置文件
+
+{% highlight text%}
+log4j.rootLogger=INFO,console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+{% endhighlight %}
+
+
