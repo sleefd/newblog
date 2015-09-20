@@ -6,9 +6,82 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Sep 2015 22:12:14 +0800</pubDate>
-    <lastBuildDate>Sat, 19 Sep 2015 22:12:14 +0800</lastBuildDate>
+    <pubDate>Sun, 20 Sep 2015 21:26:39 +0800</pubDate>
+    <lastBuildDate>Sun, 20 Sep 2015 21:26:39 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>tomcat远程调试</title>
+        <description>&lt;p&gt;若tomcat服务器安装在远程主机，web应用出现了问题，通常需要远程调试来解决。&lt;/p&gt;
+
+&lt;p&gt;远程调试不用在本地模拟生产环境，只需要远程服务器开启debug模式，本地连上
+服务器的监听端口即可调试，且需具备与远程服务器相同的代码。&lt;/p&gt;
+
+&lt;p&gt;连接上远程服务器后，直接在本地代码断点，即可达到与本地断点调试相同的效果。&lt;/p&gt;
+
+&lt;p&gt;tomcat远程调试非常简单，将start.sh最后一行启动代码改为&lt;code&gt;exec &quot;$PRGDIR&quot;/&quot;$EXECUTABLE&quot; jpda start &quot;$@&quot;&lt;/code&gt;即可，
+默认会开启8000端口监听连接。&lt;/p&gt;
+
+&lt;p&gt;端口定义在catalina.sh中，可通过修改JPDA_ADDRESS来修改监听端口号。&lt;/p&gt;
+
+&lt;p&gt;使用intellij idea，可Edit configuration，然后选择remote或tomcat server remote配置项，
+接着在Host和Port中分别填上ip地址与监听端口号，即可开始连接远程服务器进行调试。&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 19 Sep 2015 22:39:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog/learn/2015/09/19/tomcat-remote-debug.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/09/19/tomcat-remote-debug.html</guid>
+        
+        
+        <category>learn</category>
+        
+      </item>
+    
+      <item>
+        <title>log4j 1.x一瞥</title>
+        <description>&lt;p&gt;log4j，常用的日志库，用的很多但并不是特别了解，因此细学习了官方文档，
+以便日后使用时不会有所困惑。&lt;/p&gt;
+
+&lt;p&gt;log4j有四个重要的概念：logger,level,appender,layout，了解这四个基本概念
+就能知道如何使用log4j.&lt;/p&gt;
+
+&lt;h4 id=&quot;logger&quot;&gt;logger&lt;/h4&gt;
+&lt;p&gt;logger负责输出日志，可调用info/debug等方法输出不同级别的日志。不同的方法对应
+不同的级别请求，比如调用info则输出info级别的日志。&lt;/p&gt;
+
+&lt;p&gt;logger之间有存在继承关系，如果logger没定义级别，则继承父亲所定义的级别，RootLogger是所有logger的基类。&lt;/p&gt;
+
+&lt;h4 id=&quot;level&quot;&gt;level&lt;/h4&gt;
+&lt;p&gt;级别用于分级显示日志，不同级别输出不同的日志内容。级别请求相比于logger级别高则会输出。级别从低到高排序如下：
+  trace&amp;lt;info&amp;lt;debug&amp;lt;warn&amp;lt;error&amp;lt;fatal，因此级别若设置为trace,则所有的log请求都会输出。&lt;/p&gt;
+
+&lt;h4 id=&quot;appender&quot;&gt;appender&lt;/h4&gt;
+&lt;p&gt;appender用于定义日志的输出位置，可以是console, 可以是文件，也可以是远程socket等。且可定义
+多个，则会同时输出到多个位置。&lt;/p&gt;
+
+&lt;h4 id=&quot;layout&quot;&gt;layout&lt;/h4&gt;
+&lt;p&gt;layout用于定义输出的日志格式，由格式化字符串指定。&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;使用&lt;/h4&gt;
+&lt;p&gt;可直接在代码中定义logger，也可以由log4j.properties配置文件配置logger。&lt;/p&gt;
+
+&lt;h4 id=&quot;demo&quot;&gt;demo&lt;/h4&gt;
+&lt;p&gt;log4j.properties配置文件&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;log4j.rootLogger=INFO,console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 19 Sep 2015 22:14:00 +0800</pubDate>
+        <link>http://sleefd.github.io/newblog/learn/2015/09/19/log4j.html</link>
+        <guid isPermaLink="true">http://sleefd.github.io/newblog/learn/2015/09/19/log4j.html</guid>
+        
+        
+        <category>learn</category>
+        
+      </item>
     
       <item>
         <title>使用Gson解析json字符串</title>
@@ -488,137 +561,6 @@ git rebase --abort &lt;span class=&quot;c&quot;&gt;## abort rebase, all the ops 
         <link>http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html</link>
         <guid isPermaLink="true">http://sleefd.github.io/newblog/2015/06/19/customize-jekyll-default-style.html</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>python docstring使用</title>
-        <description>&lt;p&gt;docstring，文档字符串, 是出现在函数或类开头以”&quot;”包围的字符序列。
-可用来描述函数作用, 函数的使用方式及对函数做单元测试。&lt;/p&gt;
-
-&lt;p&gt;docstring中类似运行在python交互解释器中的代码段, 可通过doctest模块
-运行，基于docstring对函数做单元测试，是保证代码正确性的简单有效手段。&lt;/p&gt;
-
-&lt;p&gt;help(funcname)或funcname.__doc__  输出的就是该函数docstring的内容.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;extract_post_head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        extract the head of a html post, head contains&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        post name and post date.&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        &amp;gt;&amp;gt;&amp;gt; extract_post_head( r&amp;quot;blog\\2014\\01\\20\\adapter-model\\index.html&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;        (&amp;#39;adapter-model&amp;#39;, &amp;#39;2014\\\\01\\\\20&amp;#39;)&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;namepattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&amp;quot;([\w-]+)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;[\w-]+\.html$&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namepattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;datepattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&amp;quot;\d+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;\d+&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;\d+&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datepattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;doctest&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;doctest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;testmod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;写上面的demo学到以下两点:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;转义\:  在string literal中需要4个\，在rawstring中只需要两个\&lt;/li&gt;
-  &lt;li&gt;tuple中字符串的引号为单引号&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 16 Feb 2015 15:37:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/16/python-docstring.html</guid>
-        
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>正则表达式匹配罗马数字</title>
-        <description>&lt;p&gt;最近开始重新学Python，做完了&lt;a href=&quot;https://www.hackerrank.com/&quot;&gt;hackerrank&lt;/a&gt; python tutorial的题目，基本语法算是掌握了。&lt;/p&gt;
-
-&lt;p&gt;最后AC的一道题就是&lt;a href=&quot;https://www.hackerrank.com/challenges/regex-2-validate-a-roman-number&quot;&gt;正则匹配罗马数字&lt;/a&gt;。正则语法看过很多次，但感觉一直没有掌握，这次总算实战了一下，感觉正则匹配罗马数字
-是学习基本正则的一个很好的case，stackoverflow也有与这相关的问题。在做这道题的时候，我也在在sof上面提了
-一个&lt;a href=&quot;http://stackoverflow.com/questions/28381287/whats-the-difference-between-regular-pattern-abcd-and-abcd&quot;&gt;问题&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;先分析一下题目：&lt;/p&gt;
-
-&lt;p&gt;要求是匹配[1~3999]之间的所有罗马数字，匹配则输出True,不匹配则输出False.罗马数字由以下几个字母表示：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;I, 1, 最多出现3次&lt;/li&gt;
-  &lt;li&gt;V, 5, 不能重复出现&lt;/li&gt;
-  &lt;li&gt;X, 10, 最多出现3次&lt;/li&gt;
-  &lt;li&gt;L, 50, 不能重复出现&lt;/li&gt;
-  &lt;li&gt;C, 100, 最多出现3次&lt;/li&gt;
-  &lt;li&gt;D, 500, 不能重复出现&lt;/li&gt;
-  &lt;li&gt;M, 1000, 最多出现3次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;只需按照1~10、10~100等分段表示罗马数字，然后由低到高组合所有段，即可得到匹配的正则表达式。&lt;/p&gt;
-&lt;pre&gt;
-[1,10): IX|IV|V|V?I{1,3}
-		V?I{1,3}: 1~3, 6~8 
-	 	IV: 4 
- 	    IX: 9
- 	    V: 5
- 	    合并4与5得到 I?V 
- 	    =&amp;gt; IX|I?V|V?I{1,3}
-
-[10, 100): XC|XL|L|L?X{1,3}
-		L?X(1,3): 10~30， 60~80
-		XL: 40
-		XC: 90
-		L: 50
-		合并40与50得到 X?L
-		=&amp;gt; XC|X?L|L?X{1,3}
-同理可得
-	[100~1000): CM|C?D|D?C{1,3}
-	[1000~4000): M{1,3}
-
-综上：得到M{1,3}?|(CM|C?D|D?C{1,3})?|(XC|XL|L|L?X{1,3})?|(IX|I?V|V?I{1,3})?
-      通过？,来达到四位数的组合，但是可能会出现空串的情况
-      加上前向断言(?=.)，防止空串出现
-最后得到：^(?=.)M{1,3}?(CM|C?D|D?C{1,3})?(XC|XL|L|L?X{1,3})?(IX|I?V|V?I{1,3})?$
-&lt;/pre&gt;
-
-&lt;p&gt;总结：&lt;/p&gt;
-
-&lt;p&gt;^ab|cd$: 匹配以ab开头或以cd结尾的字符串&lt;/p&gt;
-
-&lt;p&gt;^(ab|cd)$: 匹配ab或cd， 不匹配abcd&lt;/p&gt;
-
-&lt;p&gt;(?=sth): look ahead assert前向断言, 匹配满足括号中正则的前面一个位置，不消耗字符,意味匹配了括号中的字符继续作为输入匹配后续正则.&lt;/p&gt;
-
-&lt;p&gt;比如a(?=b): 匹配ab中的a &lt;br /&gt;
-       (?=.)a: 只能匹配a&lt;/p&gt;
-
-&lt;p&gt;(?:): not catch group，匹配括号正则的字符串会成为一个group被捕捉，捕捉group会降低匹配效率。对于无需
-   捕捉group的正则，应该将每个()改为(?:).比如上面的罗马数字匹配正则就可以改为&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;^(?=.)M{1,3}?(?:CM&lt;/td&gt;
-      &lt;td&gt;C?D&lt;/td&gt;
-      &lt;td&gt;D?C{1,3})?(?:XC&lt;/td&gt;
-      &lt;td&gt;XL&lt;/td&gt;
-      &lt;td&gt;L&lt;/td&gt;
-      &lt;td&gt;L?X{1,3})?(?:IX&lt;/td&gt;
-      &lt;td&gt;I?V&lt;/td&gt;
-      &lt;td&gt;V?I{1,3})?$&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-</description>
-        <pubDate>Sun, 15 Feb 2015 12:23:00 +0800</pubDate>
-        <link>http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</link>
-        <guid isPermaLink="true">http://sleefd.github.io/newblog/python/2015/02/15/match-roman-number-with-regex.html</guid>
-        
-        
-        <category>python</category>
         
       </item>
     

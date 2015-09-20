@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>慎独</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>tomcat远程调试</title>
+  <meta name="description" content="若tomcat服务器安装在远程主机，web应用出现了问题，通常需要远程调试来解决。">
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="/newblog/css/main.css">
   <link rel="stylesheet" href="/newblog/css/monokai.css">
   <link rel="stylesheet" href="/newblog/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/page2/">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/learn/2015/09/19/tomcat-remote-debug.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -65,60 +64,32 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">POSTS</h1>
+  <header class="post-header">
+    <h1 class="post-title">tomcat远程调试</h1>
+    <p class="post-meta">Sep 19, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/learn/2015/08/28/mod-git-remote.html">git fork工作流</a>
-          
-        <span class="post-meta">Aug 28, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/bigdata/2015/08/21/sqoop-compile.html">win下sqoop1.99.6编译</a>
-          
-        <span class="post-meta">Aug 21, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/learn/2015/08/20/git-related.html">git相关操作</a>
-          
-        <span class="post-meta">Aug 20, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/front-end/2015/07/05/ajax-always-fail.html">ajax总是调用error handle</a>
-          
-        <span class="post-meta">Jul 5, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/2015/06/19/customize-jekyll-default-style.html">修改jekyll默认样式</a>
-          
-        <span class="post-meta">Jun 19, 2015</span>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>若tomcat服务器安装在远程主机，web应用出现了问题，通常需要远程调试来解决。</p>
 
-<!-- Pagination links -->
-  <div class="pagination">
-    
-      <a href="/newblog/index.html" class="previous">Previous</a>
-    
-    <span class="page_number">|</span>
-<!--     <span class="page_number ">Page: 2 of 4</span>
- -->    
-      <a href="/newblog/page3" class="next">Next</a>
-    
-  </div>
+<p>远程调试不用在本地模拟生产环境，只需要远程服务器开启debug模式，本地连上
+服务器的监听端口即可调试，且需具备与远程服务器相同的代码。</p>
+
+<p>连接上远程服务器后，直接在本地代码断点，即可达到与本地断点调试相同的效果。</p>
+
+<p>tomcat远程调试非常简单，将start.sh最后一行启动代码改为<code>exec "$PRGDIR"/"$EXECUTABLE" jpda start "$@"</code>即可，
+默认会开启8000端口监听连接。</p>
+
+<p>端口定义在catalina.sh中，可通过修改JPDA_ADDRESS来修改监听端口号。</p>
+
+<p>使用intellij idea，可Edit configuration，然后选择remote或tomcat server remote配置项，
+接着在Host和Port中分别填上ip地址与监听端口号，即可开始连接远程服务器进行调试。</p>
+
+
+  </article>
+
 </div>
 
       </div>
