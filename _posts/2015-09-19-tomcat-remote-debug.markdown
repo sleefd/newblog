@@ -13,7 +13,7 @@ categories: learn
 连接上远程服务器后，直接在本地代码断点，即可达到与本地断点调试相同的效果。
 
 tomcat远程调试非常简单，将start.sh最后一行启动代码改为<code>exec "$PRGDIR"/"$EXECUTABLE" jpda start "$@"</code>即可，
-默认会开启8000端口监听连接。
+默认会开启8000端口监听连接或直接命令行执行<code>catalina.sh jpda start</code>。
 
 端口定义在catalina.sh中，可通过修改JPDA\_ADDRESS来修改监听端口号。
 
