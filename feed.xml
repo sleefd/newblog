@@ -6,8 +6,8 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Sep 2015 21:26:39 +0800</pubDate>
-    <lastBuildDate>Sun, 20 Sep 2015 21:26:39 +0800</lastBuildDate>
+    <pubDate>Mon, 21 Sep 2015 09:31:56 +0800</pubDate>
+    <lastBuildDate>Mon, 21 Sep 2015 09:31:56 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -20,7 +20,7 @@
 &lt;p&gt;连接上远程服务器后，直接在本地代码断点，即可达到与本地断点调试相同的效果。&lt;/p&gt;
 
 &lt;p&gt;tomcat远程调试非常简单，将start.sh最后一行启动代码改为&lt;code&gt;exec &quot;$PRGDIR&quot;/&quot;$EXECUTABLE&quot; jpda start &quot;$@&quot;&lt;/code&gt;即可，
-默认会开启8000端口监听连接。&lt;/p&gt;
+默认会开启8000端口监听连接或直接命令行执行&lt;code&gt;catalina.sh jpda start&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;端口定义在catalina.sh中，可通过修改JPDA_ADDRESS来修改监听端口号。&lt;/p&gt;
 
