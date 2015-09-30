@@ -1,5 +1,8 @@
 ---
 ---
+body {
+	font-family:'Open Sans', HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
 pre, code{
 	overflow-x: hidden;
@@ -11,6 +14,9 @@ pre, code{
     pre, code {
         background-color: black;
     }
+}
+.site-title{
+	font-weight:bold;
 }
 
 .post-link {
@@ -28,7 +34,7 @@ pre, code{
 	float: none;
 }
 .post-title{
-	font-size: 25px;
+	font-size: 1.4em;
 	font-weight: bold;
 }
 
@@ -40,14 +46,21 @@ a:visited{
 	text-align: center;	
 }
 
+.post-content{
+	line-height: 2;
+	font-weight: 400;
+	text-align: justify;
+}
+
 .post-content h3{
-	font-size:20px;
+	font-size:1.3em;
 	margin-bottom: 12px;
 	font-weight: bold;
 }
 
-.post-content{
-line-height: 2;
-font-weight: 400;
-text-align: justify;
+.post-content h4{
+	font-size:1.2em;
+	margin-bottom: 12px;
+	font-weight: bold;
 }
+
