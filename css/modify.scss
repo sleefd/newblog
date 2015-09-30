@@ -1,5 +1,9 @@
 ---
 ---
+
+$header-background:#eee;
+$page-background: #eee;
+$footer-background:#eee;
 body {
 	font-family:'Open Sans', HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -15,10 +19,26 @@ pre, code{
         background-color: black;
     }
 }
+
+.site-header{
+	background-color: $header-background;
+}
+
+.site-footer{
+	background-color:$footer-background;
+	padding:0 0;
+}
+.page-content{
+	background-color:$page-background;
+}
+
+.site-footer .wrapper{
+ margin-top:15px;
+ padding-bottom:15px;
+}
 .site-title{
 	font-weight:bold;
 }
-
 .post-link {
     display: inline;
     color: green;
