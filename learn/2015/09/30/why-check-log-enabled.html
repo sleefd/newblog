@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>慎独</title>
-  <meta name="description" content="博学之，审问之，慎思之，明辨之，笃行之
-">
+  <title>是否需要在log信息之前checkXXXEnabled</title>
+  <meta name="description" content="项目中经常需要log日志，有人直接log.debug(),有人在log日志之前会进行检查log.isDebugEnabled()，而我则习惯采用第一种做法，因为简便。那log之前检查对应级别是否开启有必要吗？">
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="/newblog/css/main.css">
   <link rel="stylesheet" href="/newblog/css/monokai.css">
   <link rel="stylesheet" href="/newblog/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/page3/">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/learn/2015/09/30/why-check-log-enabled.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -65,60 +64,38 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">POSTS</h1>
+  <header class="post-header">
+    <h1 class="post-title">是否需要在log信息之前checkXXXEnabled</h1>
+    <p class="post-meta">Sep 30, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/2015/06/19/customize-jekyll-default-style.html">修改jekyll默认样式</a>
-          
-        <span class="post-meta">Jun 19, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/16/python-docstring.html">python docstring使用</a>
-          
-        <span class="post-meta">Feb 16, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/15/match-roman-number-with-regex.html">正则表达式匹配罗马数字</a>
-          
-        <span class="post-meta">Feb 15, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/python/2015/02/07/yield-and-decorator.html">python yield、decorator 与可变参数</a>
-          
-        <span class="post-meta">Feb 7, 2015</span>
-      </li>
-    
-      <li>
-        <h2>
-          <a class="post-link" href="/newblog/mahout/2015/01/08/testnaivebayes-prob.html">修改mahout naivebayes test driver遇到问题</a>
-          
-        <span class="post-meta">Jan 8, 2015</span>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>项目中经常需要log日志，有人直接log.debug(),有人在log日志
+之前会进行检查log.isDebugEnabled()，而我则习惯采用第一种做法，
+因为简便。那log之前检查对应级别是否开启有必要吗？</p>
 
-<!-- Pagination links -->
-  <div class="pagination">
-    
-      <a href="/newblog/page2" class="previous">Previous</a>
-    
-    <span class="page_number">|</span>
-<!--     <span class="page_number ">Page: 3 of 4</span>
- -->    
-      <a href="/newblog/page4" class="next">Next</a>
-    
-  </div>
+<p>其实是有必要的。表面上看直接log.debug只进行了一次enable检查，但若之前
+加上log.isXXEnabled()则会进行两次enabled检查，是否多此一举呢？其实不然，
+如果不进行enabled检查，直接log.debug，如果log的message存在复杂操作比如
+字符串连接或object.toString等，那么根据参数先进行计算的原则，enable
+检查之前会进行复杂不必要的字符串运算增加开销，但若之前已经进行了检查
+就不会有此开销。</p>
+
+<p>使用log4j1.x，log之前都需进行log.isXXXEnabled检查，但若使用log4j2.x，则
+可采用log.debug(“divide by {}”， num)，这种新的接口输出信息，不会在level检查
+之前进行额外计算。</p>
+
+<h4 id="section">参考</h4>
+
+<p><a href="http://stackoverflow.com/questions/963492/in-log4j-does-checking-isdebugenabled-before-logging-improve-performance">stackoverflow</a></p>
+
+<p><a href="https://logging.apache.org/log4j/2.0/manual/api.html">log4j2 api</a></p>
+
+
+  </article>
+
 </div>
 
       </div>
