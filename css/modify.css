@@ -9,6 +9,20 @@ pre, code {
 .highlight pre, .highlight code {
   background-color: black; }
 
+.site-header {
+  background-color: #eee; }
+
+.site-footer {
+  background-color: #eee;
+  padding: 0 0; }
+
+.page-content {
+  background-color: #eee; }
+
+.site-footer .wrapper {
+  margin-top: 15px;
+  padding-bottom: 15px; }
+
 .site-title {
   font-weight: bold; }
 
