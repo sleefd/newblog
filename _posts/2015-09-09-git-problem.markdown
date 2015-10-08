@@ -36,6 +36,6 @@ git push remote branch  # recreate remote branch
 {% highlight bash %}
 git fetch upstream # get new added branch
 git remote -v # upstream/newbranch
-git checkout -b upstream/newbranch  # create local branch of fetched newbranch
+git checkout newbranch  # get the fetched newbrach
 git push yourremote newbranch 
 {% endhighlight %}
