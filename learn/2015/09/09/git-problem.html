@@ -95,11 +95,11 @@ git push remote branch  <span class="c"># recreate remote branch</span></code></
 
 <p>情况是这样的，fork了一个remote repo，开始只有一个branch，
 然后remote新增了一个branch，如何获取这个新增的branch，
-可以先pull，然后checkout新branch，再push到自己的remote就可以了。</p>
+可以先fetch，然后checkout新branch，再push到自己的remote就可以了。</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git pull upstream master
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git fetch upstream <span class="c"># get new added branch</span>
 git remote -v <span class="c"># upstream/newbranch</span>
-git checkout -b upstream/newbranch
+git checkout -b upstream/newbranch  <span class="c"># create local branch of fetched newbranch</span>
 git push yourremote newbranch</code></pre></div>
 
 

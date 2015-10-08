@@ -6,8 +6,8 @@
 </description>
     <link>http://sleefd.github.io/newblog/</link>
     <atom:link href="http://sleefd.github.io/newblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 30 Sep 2015 13:45:34 +0800</pubDate>
-    <lastBuildDate>Wed, 30 Sep 2015 13:45:34 +0800</lastBuildDate>
+    <pubDate>Thu, 08 Oct 2015 17:03:05 +0800</pubDate>
+    <lastBuildDate>Thu, 08 Oct 2015 17:03:05 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -228,11 +228,11 @@ git push remote branch  &lt;span class=&quot;c&quot;&gt;# recreate remote branch
 
 &lt;p&gt;情况是这样的，fork了一个remote repo，开始只有一个branch，
 然后remote新增了一个branch，如何获取这个新增的branch，
-可以先pull，然后checkout新branch，再push到自己的remote就可以了。&lt;/p&gt;
+可以先fetch，然后checkout新branch，再push到自己的remote就可以了。&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git pull upstream master
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git fetch upstream &lt;span class=&quot;c&quot;&gt;# get new added branch&lt;/span&gt;
 git remote -v &lt;span class=&quot;c&quot;&gt;# upstream/newbranch&lt;/span&gt;
-git checkout -b upstream/newbranch
+git checkout -b upstream/newbranch  &lt;span class=&quot;c&quot;&gt;# create local branch of fetched newbranch&lt;/span&gt;
 git push yourremote newbranch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </description>
