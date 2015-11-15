@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>git相关操作</title>
+  <meta name="description" content="平时自用git涉及不到什么高级的用法，因为也就一个人开发。最近工作上用gerrit提交代码, 遇到很多问题, 发现对git的有些操作并不了解，现总结一些问题及命令如下：">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="/newblog/css/main.css">
+  <link rel="stylesheet" href="/newblog/css/monokai.css">
+  <link rel="stylesheet" href="/newblog/css/modify.css">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/learn/2015/08/20/git-related.html">
+  <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/newblog/">慎独</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/newblog/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">git相关操作</h1>
+    <p class="post-meta">Aug 20, 2015</p>
+  </header>
+
+  <article class="post-content">
+    <p>平时自用git涉及不到什么高级的用法，因为也就一个人开发。
+最近工作上用gerrit提交代码, 遇到很多问题, 发现对git的有些
+操作并不了解，现总结一些问题及命令如下：</p>
+
+<h3 id="pullgit-review-pullpush">每次提交代码都应该先pull，再git review; 或者先pull，再push</h3>
+<p>pull保证本地代码与remote一致，再push自己本地的修改到remote,这样不会有冲突。</p>
+
+<p>直接push很可能有冲突。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git pull origin master
+<span class="c">### other operations</span>
+git push origin master</code></pre></div>
+
+<h3 id="git-commit---amend-amend">git commit –amend, amend上一次提交，不会产生新提交</h3>
+<p>可用于重新修改comment，或修改上一次提交的文件内容，只是再次commit
+时要加上–amend选项。</p>
+
+<h3 id="git-add">丢弃git add到暂存区的文件修改</h3>
+
+<p>有三种方法，一是在原文件上修改后重新add，staged的相同文件就会被覆盖;</p>
+
+<p>另一种方法是reset head;</p>
+
+<p>还可以重新checkout该文件，那么工作区中该文件就会回到未修改之前的状态，再在上面做修改后add.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git reset head filename <span class="c">## unstaged filename</span>
+git reset head <span class="c"># unstaged all the files</span>
+git checkout -- filename <span class="c"># reset file in the workspace</span></code></pre></div>
+
+<h3 id="git-reset-">git reset, 重置到某次提交</h3>
+<p>提交多次后，想回到某次提交的状态，可以使用reset，
+reset之后，该次提交之后的所有提交都木有了。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># reset to last second commit,</span>
+<span class="c"># all the modified in head return to workspace</span>
+git reset head~1 
+
+<span class="c"># reset to last second commit,all the modified are discarded</span>
+<span class="c"># workspce is clean</span>
+git reset head~1 --hard</code></pre></div>
+
+<h3 id="git-revert-commit-revertcommit">git revert commit, revert某次commit</h3>
+
+<p>会产生一次新的提交，新的提交重置commit的内容</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># revert head, produce a new commit &quot;revert&quot;</span>
+git revert head  
+
+<span class="c">#git revert commit of SHA</span>
+git revert COMMIT_SHA</code></pre></div>
+
+<h3 id="git-stashclean">git stash可缓存工作区的内容到一个栈中，让工作区恢复到clean状态</h3>
+
+<p>可通过git stash apply或git stash pop来恢复最后被暂存的东西（位于栈顶）。</p>
+
+<p>注意untrack的文件还在workspace中。</p>
+
+<p>当需要从一个分支切换到另一个分支而有不想commit当前工作内容，可以先stash，
+然后切换分支。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git stash
+git checkout master 
+<span class="c">### do sth</span>
+git checkout dev
+git stash apply <span class="c"># get back what u are doing </span>
+
+git stash list <span class="c"># review all the stashed content</span>
+git stash apply stash@<span class="o">{</span>2<span class="o">}</span> <span class="c">#choose last second stash apply</span>
+git stash pop <span class="c">#apply stash and remove the stash from stash list</span>
+git stash clear <span class="c">#clear stashes in stash list</span></code></pre></div>
+
+<h3 id="rebasemastercommitreview">新特性在分支开发，开发完毕后，rebase到master，可保证分支的每次commit，都可以review</h3>
+
+<p>对于较复杂的feature开发，肯定会有多次commit，gerrit分支上的每次commit也会产生changeID, 分支rebase到最新的master,
+然后git review，会把所有逻辑化的commit按顺序提交到gerrit进行review,
+并且rebase后master的commit历史是线性的不会出现分叉。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git pull origin master <span class="c"># update master </span>
+
+git checkout -b feature
+<span class="c">## multiple times modify or add </span>
+git add 
+git commit  
+
+git rebase master <span class="c">##fast merge or fix confilcts</span>
+git checkout master
+git merge feature</code></pre></div>
+
+<h3 id="mergepullrebase-">冲突解决，merge、pull、rebase都可能会有冲突， 冲突解决之后，才能继续操作</h3>
+
+<p>出现冲突，可先用git status查看有哪些文件冲突，然后一次修改这些文件。</p>
+
+<p>冲突的地方在«« 与 »»之间，中间由=====分隔开，上下分别代表不同commit的修改内容。</p>
+
+<p>解决冲突可采取接纳你的代码或其他人的代码或合并的方式，解决完之后重新commit.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git status  <span class="c">### check unmerged conflict files</span>
+<span class="c">### fix conflicts</span>
+git add .  <span class="c">### stage modified files</span>
+git commit -m <span class="s2">&quot;fix conflicts&quot;</span> <span class="c">## commit, fix conflicts over</span></code></pre></div>
+
+<h3 id="git-detached-head">git detached head</h3>
+
+<p>出现detached head是由于checkout了非head的commit，
+git checkout master后就没有了</p>
+
+<h3 id="git-rebase--i">git rebase -i,交互式变基，非常强大的功能</h3>
+<p>可重新组织commit的提交顺序，修改commit，拆分commit，
+目前只会简单使用。</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git rebase -i commit <span class="c">## appear a vim editor contains all the commits after the commit</span>
+<span class="c">### do some edit, modify pick to edit，you can edit the commit </span>
+git rebase --continue <span class="c">## continue rebase, until end the rebase</span>
+git rebase --abort <span class="c">## abort rebase, all the ops are canceled</span></code></pre></div>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>慎独</li>
+          <li><a href="mailto:sleefd@gmail.com">sleefd@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/sleefd">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">sleefd</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/sleefd">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">sleefd</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">博学之，审问之，慎思之，明辨之，笃行之
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
