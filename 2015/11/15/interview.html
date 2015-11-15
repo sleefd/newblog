@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>octopress博客迁移到新电脑</title>
-  <meta name="description" content="本来是用octopress写博客，但是上班换了新电脑，需要在新电脑上重新部署octopress。">
+  <title>面试感悟</title>
+  <meta name="description" content="周五周六两天参加了公司秋招面试，负责面试数据挖掘工程师岗位。">
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="/newblog/css/main.css">
   <link rel="stylesheet" href="/newblog/css/monokai.css">
   <link rel="stylesheet" href="/newblog/css/modify.css">
-  <link rel="canonical" href="http://sleefd.github.io/newblog/jekyll/update/2014/12/30/move-octopress.html">
+  <link rel="canonical" href="http://sleefd.github.io/newblog/2015/11/15/interview.html">
   <link rel="alternate" type="application/rss+xml" title="慎独" href="http://sleefd.github.io/newblog/feed.xml" />
 </head>
 
@@ -67,33 +67,27 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">octopress博客迁移到新电脑</h1>
-    <p class="post-meta">Dec 30, 2014</p>
+    <h1 class="post-title">面试感悟</h1>
+    <p class="post-meta">Nov 15, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>本来是用octopress写博客，但是上班换了新电脑，需要在新电脑上重新部署octopress。</p>
+    <p>周五周六两天参加了公司秋招面试，负责面试数据挖掘工程师岗位。</p>
 
-<p>首先clone下source分支的代码,然后clone master分支的代码到_deploy文件夹中。master分支存放的是渲染后的博客，source分支存放的是octopress代码以及主题等。github访问xx.github.com，访问的就是该repo下的master分支代码。</p>
+<p>这次面试发现自己有很多不足，虽然是面试官, 但仍需要在以下几个方面
+强化自己。</p>
 
-<p>重新部署的时候遇到下面几个问题：</p>
+<ol>
+  <li>基本机器学习算法,尤其是svm与神经网络。</li>
+  <li>spark。对spark基本不了解。 </li>
+  <li>hadoop streaming.</li>
+  <li>专业词汇欠缺。</li>
+  <li>引导能力与表达能力不足。</li>
+</ol>
 
-<ul>
-  <li>source分支的代码从来没有上传过， github上只保存有最新的master分支的文件。</li>
-  <li>rake new_post，然后rake deploy之后，_deploy文件夹被清空，然后重新生成，导致原来的所有post遗失。</li>
-  <li>所有post的markdown文件遗失，无法重新生成所有的html文件。如果源markdown没有遗失，啥事都没有，哎。</li>
-</ul>
+<p>感想：很多人都不知道自己适合干什么，等发现已经太迟了，学校对学生还是
+缺乏适当的引导,找工作不容易啊。</p>
 
-<p>尝试过这样一些解决方法：</p>
-
-<ul>
-  <li>修改Rakefile，修改push task，每次push都不删除deploy文件，不行。因为new_post会产生新的index.html和sitemap，虽然保留有旧的post html，但没法从index.html访问到。</li>
-  <li>复制deploy中的文件到source文件夹中，因为source文件夹缺少一些资源，还是不行。rake generate的时候，没有更新index.html。</li>
-</ul>
-
-<p>稍后有时间再试一试方法2，可以先把资源拷贝到source里面，然后修改index，保有原来的post链接，新链接可添加在index里面。如果还是不行的话，就只能写个脚本调用pandoc将html转化成markdown，然后再把所有post的markdown丢到soure的post文件夹下面了。</p>
-
-<p>这次重新deploy帮助review了好多东西，首先是github的基本概念，然后是branch的基本操作，remote的基本操作,怎样阅读diff文件等等。决定抽时间看git pro，系统的学习一下git的操作。</p>
 
   </article>
 
